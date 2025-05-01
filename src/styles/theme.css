@@ -1,0 +1,256 @@
+/* 
+module.exports = {
+    theme: {
+      extend: {
+        colors: {
+    "Primary/Primary": "rgba(0, 95, 240, 1)",
+    "Primary/Tint/50": "rgba(242, 247, 255, 1)",
+    "Primary/Tint/100": "rgba(227, 237, 252, 1)",
+    "Primary/Tint/200": "rgba(189, 228, 252, 1)",
+    "Primary/Tint/300": "rgba(150, 208, 250, 1)",
+    "Primary/Tint/400": "rgba(73, 156, 245, 1)",
+    "Primary/Shade/600": "rgba(0, 83, 217, 1)",
+    "Primary/Shade/700": "rgba(0, 62, 179, 1)",
+    "Primary/Shade/800": "rgba(0, 45, 143, 1)",
+    "Primary/Shade/900": "rgba(0, 30, 107, 1)",
+    "Primary/Shade/950": "rgba(0, 17, 69, 1)",
+    "Secondry/Secondry": "rgba(255, 162, 0, 1)",
+    "Secondry/tint/50": "rgba(255, 253, 242, 1)",
+    "Secondry/tint/100": "rgba(255, 250, 230, 1)",
+    "Secondry/tint/200": "rgba(255, 241, 191, 1)",
+    "Secondry/tint/300": "rgba(255, 230, 153, 1)",
+    "Secondry/tint/400": "rgba(255, 201, 77, 1)",
+    "Secondry/shade/600": "rgba(230, 142, 0, 1)",
+    "Secondry/shade/700": "rgba(191, 108, 0, 1)",
+    "Secondry/shade/800": "rgba(153, 79, 0, 1)",
+    "Secondry/shade/900": "rgba(115, 54, 0, 1)",
+    "Secondry/shade/950": "rgba(74, 31, 0, 1)",
+    "Neutral/shade/White": "rgba(255, 255, 255, 1)",
+    "Neutral/shade/Black": "rgba(12, 12, 12, 1)",
+    "Neutral/Text/200 - Disabled": "rgba(211, 219, 224, 1)",
+    "Neutral/Text/400 - Tritary": "rgba(152, 162, 179, 1)",
+    "Neutral/Text/500 - Secondary": "rgba(102, 112, 133, 1)",
+    "Neutral/Text/900 - Primary": "rgba(16, 24, 40, 1)",
+    "Neutral/Back ground/50  - Main": "rgba(249, 251, 252, 1)",
+    "Neutral/Back ground/100": "rgba(245, 248, 252, 1)",
+    "Neutral/Back ground/200-Disabled": "rgba(243, 243, 243, 1)",
+    "Neutral/Back ground/300": "rgba(233, 239, 244, 1)",
+    "Neutral/Back ground/400 - Stroke": "rgba(224, 230, 242, 1)",
+    "Neutral/Back ground/500": "rgba(218, 228, 237, 1)",
+    "Neutral/Back ground/600": "rgba(211, 222, 233, 1)",
+    "Neutral/Back ground/700": "rgba(204, 217, 229, 1)",
+    "Neutral/Back ground/800": "rgba(196, 211, 226, 1)",
+    "Neutral/Back ground/900": "rgba(189, 206, 222, 1)",
+    "State/Error/Error 500": "rgba(240, 68, 56, 1)",
+    "State/Error/Error 400": "rgba(243, 110, 100, 1)",
+    "State/Error/Error 300": "rgba(247, 151, 144, 1)",
+    "State/Error/Error 200": "rgba(250, 193, 189, 1)",
+    "State/Error/Error 100": "rgba(253, 234, 233, 1)",
+    "State/Success/Success 500": "rgba(18, 183, 106, 1)",
+    "State/Success/Success 400": "rgba(36, 233, 141, 1)",
+    "State/Success/Success 300": "rgba(99, 240, 174, 1)",
+    "State/Success/Success 200": "rgba(161, 246, 206, 1)",
+    "State/Success/Success 100": "rgba(224, 252, 239, 1)",
+    "State/Warning/Warning 500": "rgba(247, 144, 9, 1)",
+    "State/Warning/Warning 400": "rgba(249, 169, 64, 1)",
+    "State/Warning/Warning 300": "rgba(251, 193, 118, 1)",
+    "State/Warning/Warning 200": "rgba(252, 218, 173, 1)",
+    "State/Warning/Warning 100": "rgba(254, 243, 228, 1)"
+  },
+        fontFamily: {
+    "Headline Styles/Large/Large": [
+      "Yekan Bakh"
+    ],
+    "Headline Styles/Medium/Bold": [
+      "Yekan Bakh"
+    ],
+    "Headline Styles/Small/Bold": [
+      "Yekan Bakh"
+    ],
+    "Titles Styles/Large/Semi Bold": [
+      "Yekan Bakh"
+    ],
+    "Titles Styles/Large/Bold": [
+      "Yekan Bakh"
+    ],
+    "Titles Styles/Medium/Semi Bold": [
+      "Yekan Bakh"
+    ],
+    "Titles Styles/Medium/bold": [
+      "Yekan Bakh"
+    ],
+    "Titles Styles/Small/Regular": [
+      "Yekan Bakh"
+    ],
+    "Titles Styles/Small/Semi bold": [
+      "Yekan Bakh"
+    ],
+    "Body Styles/Large/Regular": [
+      "Yekan Bakh"
+    ],
+    "Body Styles/Large/Semi Bold": [
+      "Yekan Bakh"
+    ],
+    "Body Styles/Medium/Regular": [
+      "Yekan Bakh"
+    ],
+    "Body Styles/Medium/Semi Bold": [
+      "Yekan Bakh"
+    ],
+    "Body Styles/Small/Semi Bold": [
+      "Yekan Bakh"
+    ],
+    "Body Styles/Small/Regular": [
+      "Yekan Bakh"
+    ],
+    "Label Styles/Large/Regular": [
+      "Yekan Bakh"
+    ],
+    "Label Styles/Large/Semi bold": [
+      "Yekan Bakh"
+    ],
+    "Label Styles/Medium/Regular": [
+      "Yekan Bakh"
+    ],
+    "Label Styles/Medium/Semi Bold": [
+      "Yekan Bakh"
+    ],
+    "Label Styles/Small/Regular": [
+      "Yekan Bakh"
+    ],
+    "Label Styles/Small/Semi Bold": [
+      "Yekan Bakh"
+    ]
+  },
+        fontSize: {
+    "Headline Styles/Large/Large": "56px",
+    "Headline Styles/Medium/Bold": "48px",
+    "Headline Styles/Small/Bold": "40px",
+    "Titles Styles/Large/Semi Bold": "32px",
+    "Titles Styles/Large/Bold": "32px",
+    "Titles Styles/Medium/Semi Bold": "24px",
+    "Titles Styles/Medium/bold": "24px",
+    "Titles Styles/Small/Regular": "20px",
+    "Titles Styles/Small/Semi bold": "20px",
+    "Body Styles/Large/Regular": "18px",
+    "Body Styles/Large/Semi Bold": "18px",
+    "Body Styles/Medium/Regular": "16px",
+    "Body Styles/Medium/Semi Bold": "16px",
+    "Body Styles/Small/Semi Bold": "14px",
+    "Body Styles/Small/Regular": "14px",
+    "Label Styles/Large/Regular": "16px",
+    "Label Styles/Large/Semi bold": "16px",
+    "Label Styles/Medium/Regular": "14px",
+    "Label Styles/Medium/Semi Bold": "14px",
+    "Label Styles/Small/Regular": "12px",
+    "Label Styles/Small/Semi Bold": "12px"
+  },
+        boxShadow: {
+    "Drop Shadow": "0px 4px 16px rgba(0, 45, 143, 0.11999999731779099)"
+  }
+      }
+    }
+  };
+   */
+/* * @type {import('tailwindcss').Config} */
+/* export default {
+  darkMode: ['class'],
+  content: [
+    './index.html',
+    './src*.{js,ts,jsx,tsx}',
+  /* ],
+  theme: {
+    extend: {
+      fontFamily: {
+        yekan: ['Yekan Bakh', 'sans-serif'],
+      },
+      fontSize: {
+        headlineLg: '56px',
+        headlineMd: '48px',
+        headlineSm: '40px',
+        titleLg: '32px',
+        titleMd: '24px',
+        titleSm: '20px',
+        bodyLg: '18px',
+        bodyMd: '16px',
+        bodySm: '14px',
+        labelLg: '16px',
+        labelMd: '14px',
+        labelSm: '12px',
+      },
+      colors: {
+        primary: {
+          DEFAULT: '#005FF0',
+          50: '#F2F7FF',
+          100: '#E3EDFC',
+          200: '#BDD4FC',
+          300: '#96D0FA',
+          400: '#499CF5',
+          600: '#0053D9',
+          700: '#003EB3',
+          800: '#002D8F',
+          900: '#001E6B',
+          950: '#001145',
+        },
+        secondary: {
+          DEFAULT: '#FFA200',
+          50: '#FFFDF2',
+          100: '#FFFAE6',
+          200: '#FFF1BF',
+          300: '#FFE699',
+          400: '#FFC94D',
+          600: '#E68E00',
+          700: '#BF6C00',
+          800: '#994F00',
+          900: '#733600',
+          950: '#4A1F00',
+        },
+        neutral: {
+          white: '#FFFFFF',
+          black: '#0C0C0C',
+          50: '#F9FBFC',
+          100: '#F5F8FC',
+          200: '#F3F3F3',
+          300: '#E9EFF4',
+          400: '#E0E6F2',
+          500: '#DAE4ED',
+          600: '#D3DEE9',
+          700: '#CCD9E5',
+          800: '#C4D3E2',
+          900: '#BDCEDC',
+          text: {
+            200: '#D3DBE0',
+            400: '#98A2B3',
+            500: '#667085',
+            900: '#101828',
+          }
+        },
+        error: {
+          100: '#FDEAE9',
+          200: '#FAC1BD',
+          300: '#F79790',
+          400: '#F36E64',
+          500: '#F04438',
+        },
+        success: {
+          100: '#E0FCEF',
+          200: '#A1F6CE',
+          300: '#63F0AE',
+          400: '#24E98D',
+          500: '#12B76A',
+        },
+        warning: {
+          100: '#FEF3E4',
+          200: '#FCDAAD',
+          300: '#FBC176',
+          400: '#F9A940',
+          500: '#F79009',
+        },
+      },
+      boxShadow: {
+        drop: '0px 4px 16px rgba(0, 45, 143, 0.12)',
+      },
+    },
+  },
+  plugins: [require('tailwindcss-animate')],
+/* } */
