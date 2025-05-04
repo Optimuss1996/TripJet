@@ -11,7 +11,7 @@ export default function Footer() {
         <div className="  flex justify-start w-full lg:w-auto px-6">
           <div className=" flex flex-col gap-5 text-neutral-text-500 ">
             <img
-              src="/public/logo/Logo.svg"
+              src="/logo/Logo.svg"
               alt="LogoTripJet"
               className="w-32 lg:w-40"
             />
@@ -61,10 +61,10 @@ export default function Footer() {
           <LiaTelegram className=" text-primary " size={30} />
         </div>
         <div className=" flex items-center gap-2">
-          <img src="/public/footer/Frame 1171276802.svg" alt="logo" />
-          <img src="/public/footer/Frame 1430103785.svg" alt="logo" />
-          <img src="/public/footer/Frame 1430103786.svg" alt="logo" />
-          <img src="/public/footer/Frame 1430103787.svg" alt="logo" />
+          <img src="/footer/Frame 1171276802.svg" alt="logo" />
+          <img src="/footer/Frame 1430103785.svg" alt="logo" />
+          <img src="/footer/Frame 1430103786.svg" alt="logo" />
+          <img src="/footer/Frame 1430103787.svg" alt="logo" />
         </div>
       </section>
 

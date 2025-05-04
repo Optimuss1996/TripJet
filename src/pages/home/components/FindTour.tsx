@@ -1,0 +1,54 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { useCitiesByIsInternational } from "@/hooks/useCities";
+import { useState } from "react";
+import Button from "@/components/common/Button";
+import { Combobox } from "./Combobox";
+
+export default function FindTour() {
+  const [is_international, setIsInternational] = useState<boolean>(true);
+  const { data, error } = useCitiesByIsInternational(is_international);
+  console.log(data, error);
+
+  return (
+    <main className="w-11/12 min-h-44 mx-auto relative top-1/2 -translate-y-1/2 bg-neutral-white rounded-lg shadow-lg p-6 shadow-drop">
+      <section className="flex w-full justify-start items-center gap-6 text-neutral-text-500 text-labelLg ">
+        <p
+          onClick={() => setIsInternational(true)}
+          className={`cursor-pointer  ${
+            is_international
+              ? "text-primary border-b-2 border-b-primary mb-1"
+              : ""
+          }`}
+        >
+          تور های خارجی
+        </p>
+
+        <p
+          onClick={() => setIsInternational(false)}
+          className={`cursor-pointer  ${
+            !is_international
+              ? "text-primary border-b-2 border-b-primary mb-1"
+              : ""
+          }`}
+        >
+          تور های داخلی
+        </p>
+      </section>
+      <section className="flex md:flex-row flex-col justify-between items-center  gap-x-4 w-full mt-6 text-neutral-600">
+        <div className=" flex-1 relative border border-blue-500 rounded-lg px-5 py-3">
+          <label className="absolute right-4 -top-3 bg-white px-3 text-blue-600 text-sm font-medium bg-neutral-white">
+            مبدا
+          </label>
+          <p className="w-full text-neutral-black">تهران</p>
+        </div>
+        <div className=" flex-1 relative ">
+          <label className="absolute right-4 -top-3 bg-white px-3 text-blue-600 text-sm font-medium bg-neutral-white z-10">
+            مقصد
+          </label>
+          <Combobox cities={data ? data : []} />
+        </div>
+        <Button className=" px-4 py-2">جستجو</Button>
+      </section>
+    </main>
+  );
+}

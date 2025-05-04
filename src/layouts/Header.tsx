@@ -1,10 +1,32 @@
 import Button from "@/components/common/Button";
 import MobileMenuSheet from "@/components/common/MobileMenuSheet";
+import { useAuth } from "@/providers/AuthProvider";
+import useAuthModal from "@/store/useAuthModal";
 import { BiLogInCircle } from "react-icons/bi";
 import { IoCallOutline } from "react-icons/io5";
 import { Link } from "react-router";
+import { useNavigate } from "react-router";
+import { toast } from "sonner";
+import { supabase } from "@/lib/supabaseClient";
 
 export default function Header() {
+  const { onOpen, setWasLoggedOut } = useAuthModal();
+  const { session } = useAuth();
+  const navigate = useNavigate();
+  async function handleLogOut() {
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+      toast.error("خروج با خطا مواجه شد!");
+      setWasLoggedOut(true);
+      console.error(error.message);
+      navigate("/");
+    } else {
+      toast.success(" خارج شدید ");
+      setWasLoggedOut(true);
+    }
+  }
+
   return (
     <>
       {/* mobile menu */}
@@ -15,16 +37,12 @@ export default function Header() {
             to="/"
             className=" flex justify-center items-center gap-2 cursor-pointer"
           >
-            <img
-              src="/public/logo/Logo.svg"
-              alt="TripJet"
-              className="w-24 md:w-32"
-            />
+            <img src="/logo/Logo.svg" alt="TripJet" className="w-24 md:w-32" />
           </Link>
         </div>
 
         <div className=" flex justify-center items-center gap-5 text-labelSm">
-          <Button className=" px-2 py-1">
+          <Button onClick={onOpen} className=" px-2 py-1">
             <div className=" flex justify-center items-center gap-1">
               <BiLogInCircle className=" text-primary-50 text-titleMd" />
               <span className=" text-neutral-white font-normal">ورود</span>
@@ -35,8 +53,8 @@ export default function Header() {
 
       <main className=" hidden md:flex w-full h-28 md:px-8 lg:px-14 py-3  text-neutral-white">
         <div className="  flex justify-between items-center w-full">
-          <Link to="/" className=" flex justify-center items-center gap-2">
-            <img src="/public/logo/Logo.svg" alt="TripJet" />
+          <Link to="/" className=" flex justify-center items-center gap-2 ">
+            <img src="/logo/Logo.svg" alt="TripJet" />
           </Link>
           <div className=" flex justify-center items-center gap-8 text-neutral-black ">
             <p>تور های خارجی</p>
@@ -51,11 +69,14 @@ export default function Header() {
                 <IoCallOutline className=" text-primary text-titleMd" />
               </div>
             </Button>
-            <Button className=" px-4 py-2">
+            <Button
+              onClick={session ? handleLogOut : onOpen}
+              className=" px-4 py-2"
+            >
               <div className=" flex justify-center items-center gap-2">
                 <BiLogInCircle className=" text-primary-50 text-titleMd" />
                 <span className=" text-neutral-white font-normal">
-                  ورود / ثبت نام
+                  {session ? "خارج شوید" : " ورود / ثبت نام"}
                 </span>
               </div>
             </Button>

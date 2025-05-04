@@ -64,7 +64,7 @@
   }
   html {
     direction: rtl;
-    font-family: "Yekan Bakh", sans-serif;
+    font-family: "IranSans", sans-serif;
   }
   body {
     @apply bg-background text-foreground;
