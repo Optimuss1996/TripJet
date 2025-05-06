@@ -19,6 +19,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Cities } from "@/types/types";
+import { CiLocationOn } from "react-icons/ci";
 
 interface ComboboxProps {
   cities: Cities[];
@@ -42,25 +43,25 @@ export function Combobox({ cities }: ComboboxProps) {
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent side="bottom" align="end" className="w-full">
+      <PopoverContent side="bottom" align="center" className="w-full ">
         <Command>
-          <CommandInput
-            placeholder=" ...دوبی , آنتالیا , لندن   "
-            className="h-9"
-          />
+          <CommandInput className="h-9" />
           <CommandList>
             <CommandEmpty>شهری یافت نشد</CommandEmpty>
             <CommandGroup>
               {cities.map((cities) => (
                 <CommandItem
                   key={cities.id}
-                  value={cities.city_name}
+                  value={cities.persian_cityName}
                   onSelect={(currentValue) => {
                     setValue(currentValue === value ? "" : currentValue);
                     setOpen(false);
                   }}
                 >
-                  {cities.city_name}
+                  <div className=" flex justify-start items-center gap-2 text-neutral-text-500 text-labelSm">
+                    <CiLocationOn className=" " size={23} />
+                    <p>{cities.persian_cityName}</p>
+                  </div>
                   <Check
                     className={cn(
                       "ml-auto",

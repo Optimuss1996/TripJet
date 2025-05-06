@@ -18,7 +18,7 @@ function App() {
         <Routes>
           <Route element={<AppLayout />}>
             <Route index element={<Home />} />
-            <Route path="about" element={<About />} />
+            <Route path="aboutUs" element={<About />} />
             <Route path="tour/:tourId" element={<Tour />} />
             <Route path="account" element={<Account />} />
             <Route path="checkout" element={<Checkout />} />

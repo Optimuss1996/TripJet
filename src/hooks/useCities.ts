@@ -13,7 +13,7 @@ export function useAllCities(options?: UseQueryOptions<Cities[], Error>) {
     ...options,
   });
 }
-
+// hook for fetching all cities by is_international boolean
 export function useCitiesByIsInternational(
   is_international: boolean,
   options?: UseQueryOptions<Cities[], Error>

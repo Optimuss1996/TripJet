@@ -44,6 +44,7 @@ export interface Cities {
   id: string;
   created_at: string;
   city_name: string;
+  persian_cityName: string;
   country_name: string;
   is_international: boolean;
 }

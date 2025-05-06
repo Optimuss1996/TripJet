@@ -1,3 +1,11 @@
+import AboutUsComponents from "./components/AboutUsComponents";
+import Banner from "./components/Banner";
+
 export default function About() {
-  return <div>About</div>;
+  return (
+    <main className="md:px-">
+      <Banner />
+      <AboutUsComponents />
+    </main>
+  );
 }

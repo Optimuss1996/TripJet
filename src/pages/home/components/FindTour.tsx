@@ -10,8 +10,8 @@ export default function FindTour() {
   console.log(data, error);
 
   return (
-    <main className="w-11/12 min-h-44 mx-auto relative top-1/2 -translate-y-1/2 bg-neutral-white rounded-lg shadow-lg p-6 shadow-drop">
-      <section className="flex w-full justify-start items-center gap-6 text-neutral-text-500 text-labelLg ">
+    <main className=" w-11/12 min-h-44 mx-auto relative top-1/2 -translate-y-1/2 bg-neutral-white rounded-lg shadow-lg p-6 shadow-drop">
+      <section className="flex w-full justify-start items-center gap-6 text-neutral-text-500 text-labelMd sm:text-labelLg ">
         <p
           onClick={() => setIsInternational(true)}
           className={`cursor-pointer  ${
@@ -34,14 +34,14 @@ export default function FindTour() {
           تور های داخلی
         </p>
       </section>
-      <section className="flex md:flex-row flex-col justify-between items-center  gap-x-4 w-full mt-6 text-neutral-600">
+      <section className="flex md:flex-row flex-col justify-between items-stretch gap-y-4 gap-x-4 w-full mt-6 text-neutral-600">
         <div className=" flex-1 relative border border-blue-500 rounded-lg px-5 py-3">
           <label className="absolute right-4 -top-3 bg-white px-3 text-blue-600 text-sm font-medium bg-neutral-white">
             مبدا
           </label>
           <p className="w-full text-neutral-black">تهران</p>
         </div>
-        <div className=" flex-1 relative ">
+        <div className=" flex-1 relative w-full">
           <label className="absolute right-4 -top-3 bg-white px-3 text-blue-600 text-sm font-medium bg-neutral-white z-10">
             مقصد
           </label>

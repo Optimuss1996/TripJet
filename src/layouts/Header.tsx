@@ -60,7 +60,9 @@ export default function Header() {
             <p>تور های خارجی</p>
             <p>تور های داخلی</p>
             <p>بیمه مسافرتی</p>
-            <p className="hidden lg:block">درباره ما</p>
+            <Link to={"/aboutUs"}>
+              <p className="hidden lg:block cursor-pointer">درباره ما</p>
+            </Link>
           </div>
           <div className=" flex justify-center items-center gap-5">
             <Button className="bg-neutral-white border border-primary px-4 py-2 hidden lg:block">
