@@ -2,12 +2,15 @@
 import { useCitiesByIsInternational } from "@/hooks/useCities";
 import { useState } from "react";
 import Button from "@/components/common/Button";
-import { Combobox } from "./Combobox";
+import CitySelector from "./Combobox";
+import { useFetchToursByCityId } from "@/hooks/useTours";
+import { useGetCityId } from "@/store/useGetCityId";
 
 export default function FindTour() {
   const [is_international, setIsInternational] = useState<boolean>(true);
-  const { data, error } = useCitiesByIsInternational(is_international);
-  console.log(data, error);
+  const cityId = useGetCityId();
+  const { data } = useCitiesByIsInternational(is_international);
+  const { data: toursByCityId } = useFetchToursByCityId(cityId.cityId);
 
   return (
     <main className=" w-11/12 min-h-44 mx-auto relative top-1/2 -translate-y-1/2 bg-neutral-white rounded-lg shadow-lg p-6 shadow-drop">
@@ -45,7 +48,7 @@ export default function FindTour() {
           <label className="absolute right-4 -top-3 bg-white px-3 text-blue-600 text-sm font-medium bg-neutral-white z-10">
             مقصد
           </label>
-          <Combobox cities={data ? data : []} />
+          <CitySelector cities={data ? data : []} />
         </div>
         <Button className=" px-4 py-2">جستجو</Button>
       </section>

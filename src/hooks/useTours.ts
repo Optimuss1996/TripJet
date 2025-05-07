@@ -5,6 +5,7 @@ import {
   fetchToursByHighestPrice,
   fetchToursByTourType,
   fetchToursByMostPopular,
+  fetchToursByCityId,
 } from "@/service/data-service";
 // hook for fetching tours by top discount
 export function useFetchToursByTopDiscount(
@@ -46,6 +47,18 @@ export function useFetchToursByMostPopular(
   return useQuery<Tours[], Error>({
     queryKey: ["tours", "popular tours"],
     queryFn: fetchToursByMostPopular,
+    ...options,
+  });
+}
+// hook for fetching tours by city_id
+export function useFetchToursByCityId(
+  cityId: string,
+  options?: UseQueryOptions<Tours[], Error>
+) {
+  return useQuery<Tours[], Error>({
+    queryKey: ["tours", "by city_id"],
+    queryFn: () => fetchToursByCityId(cityId),
+    enabled: !!cityId,
     ...options,
   });
 }

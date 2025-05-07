@@ -93,3 +93,18 @@ export async function fetchToursByMostPopular(): Promise<Tours[]> {
   }
   return data as Tours[];
 }
+// fetch tours by city_id
+export async function fetchToursByCityId(cityId: string) {
+  const { data, error } = await supabase
+    .from("tours")
+    .select("*")
+    .eq("city_id", cityId);
+
+  if (error) {
+    console.error("Error fetch tours by city_id:", error);
+  } else {
+    console.log("tours by city_id:", data);
+  }
+
+  return data as Tours[];
+}

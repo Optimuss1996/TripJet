@@ -25,7 +25,7 @@ export default function MobileMenuSheet() {
             to="/"
             className=" flex justify-center items-center gap-2 cursor-pointer"
           >
-            <img src="/public/logo/Logo.svg" alt="TripJet" className=" w-24" />
+            <img src="/logo/Logo.svg" alt="TripJet" className=" w-24" />
           </Link>
         </SheetHeader>
         <nav className="flex flex-col gap-4 mt-6 text-primary">
