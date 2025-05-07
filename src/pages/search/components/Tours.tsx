@@ -1,26 +1,54 @@
-import { useState } from "react";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerOverlay,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
 import CollapsibleMultiSelect from "./CollapsibleSelect";
 import HorizontalCard from "./HorizontalCard";
-
-const options = [
-  { label: "Tehran", value: 1 },
-  { label: "Shiraz", value: 2 },
-  { label: "Tabriz", value: 3 },
-];
+import { useState } from "react";
+import { BsListCheck } from "react-icons/bs";
+import { tourFilters } from "@/utils/tourFilters";
+import HotelRatingSelect from "./HotelRatingSelect";
 
 export default function Tours() {
-  const [selected, setSelected] = useState<typeof options>([]);
-  return (
-    <main className=" flex justify-between items-center gap-6 px-4 md:px-6 lg:px-20 mt-5 mb-16">
-      <section className=" hidden md:block md:w-60 lg:w-64 xl:w-72  h-[1000px]  ">
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const Filters = (
+    <div className="flex flex-col items-center gap-y-6 w-full md:w-60 lg:w-64 xl:w-72">
+      <HotelRatingSelect />
+      {tourFilters.map((filter) => (
         <CollapsibleMultiSelect
-          options={options}
-          selected={selected}
-          onChange={setSelected}
-          placeholder="Select cities"
+          key={filter.id}
+          id={filter.id}
+          options={filter.options}
+          placeholder={filter.placeholder}
         />
+      ))}
+    </div>
+  );
+
+  return (
+    <main className="flex flex-col md:flex-row gap-6 px-4 md:px-6 lg:px-20 mt-5 mb-16">
+      {/* mobile or smaller than md*/}
+      <div className="block md:hidden mb-4">
+        <Drawer open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
+          <DrawerTrigger asChild>
+            <div className="w-28 flex items-center justify-center gap-2 border border-neutral-400 text-primary  rounded-lg px-3 py-2">
+              <BsListCheck className="text-primary" size={20} />
+              <span>فیلترها</span>
+            </div>
+          </DrawerTrigger>
+          <DrawerOverlay className="bg-neutral-black/45" />
+          <DrawerContent className="p-4">{Filters}</DrawerContent>
+        </Drawer>
+      </div>
+
+      <section className="hidden md:flex flex-col gap-y-8 md:w-60 lg:w-64 xl:w-72">
+        {Filters}
       </section>
-      <section className=" flex-1 grid grid-cols-1 sm:grid-cols-2 lg:flex flex-col  gap-6">
+
+      <section className="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:flex flex-col gap-6">
         <HorizontalCard />
         <HorizontalCard />
         <HorizontalCard />
