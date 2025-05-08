@@ -73,3 +73,12 @@ export interface Bookings {
   status: "pending" | "confirmed" | "canceled";
   created_at: string;
 }
+export interface OptionalFilters {
+  is_international?: boolean;
+  city_id?: string;
+  hotel_rating?: number;
+  price_range?: [number, number];
+  tour_type?: string;
+  difficulty_level?: string;
+  tour_rating?: number;
+}

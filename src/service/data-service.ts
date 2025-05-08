@@ -1,5 +1,5 @@
 import { supabase } from "@/lib/supabaseClient";
-import { Cities, Tours } from "@/types/types";
+import { Cities, OptionalFilters, Tours } from "@/types/types";
 
 // fetch all cities
 export async function fetchAllCities(): Promise<Cities[]> {
@@ -104,6 +104,43 @@ export async function fetchToursByCityId(cityId: string) {
     console.error("Error fetch tours by city_id:", error);
   } else {
     console.log("tours by city_id:", data);
+  }
+
+  return data as Tours[];
+}
+// 🚨This query is for fetching data with filters. Please note that these filters are optional🚨
+export async function fetchToursWithFilters(
+  filters: OptionalFilters
+): Promise<Tours[]> {
+  let query = supabase.from("tours").select("*");
+
+  if (filters.is_international !== undefined) {
+    query = query.eq("is_international", filters.is_international);
+  }
+
+  if (filters.city_id) {
+    query = query.eq("city_id", filters.city_id);
+  }
+
+  if (filters.price_range) {
+    const [min, max] = filters.price_range;
+    query = query.gte("price", min).lte("price", max);
+  }
+
+  if (filters.hotel_rating !== undefined) {
+    query = query.eq("hotel_stars", filters.hotel_rating);
+  }
+
+  if (filters.difficulty_level !== undefined) {
+    query = query.eq("difficulty_level", filters.difficulty_level);
+  }
+
+  const { data, error } = await query;
+
+  if (error) {
+    console.error("Error fetch tours by filters:", error);
+  } else {
+    console.log("tours by filters:", data);
   }
 
   return data as Tours[];

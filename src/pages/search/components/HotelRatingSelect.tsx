@@ -31,7 +31,7 @@ export default function HotelRatingSelect() {
         }`}
       >
         <div className="flex justify-center items-center border rounded-lg px-3 py-4 bg-neutral-white">
-          <div className="border rounded-lg p-3 flex gap-1">
+          <div className=" flex justify-center items-center gap-[1px] border rounded-lg p-3 bg-neutral-white  w-full">
             {hotelRating.options.map((option, index) => {
               const isSelected = selected === index;
 
@@ -39,21 +39,20 @@ export default function HotelRatingSelect() {
                 <div
                   key={option.value}
                   onClick={() => setSelected(isSelected ? null : index)}
-                  className={`flex flex-row-reverse items-center justify-center gap-[3px] cursor-pointer px-3 py-1 rounded-md transition-colors
+                  className={`flex flex-row-reverse items-stretch justify-center gap-[3px] cursor-pointer px-3 py-1 rounded-md transition-colors border-l border-neutral-400 
                     ${
                       isSelected
-                        ? "bg-primary-100 text-primary-100"
+                        ? "bg-primary-100 "
                         : "hover:bg-neutral-100 text-neutral-text-500"
                     }
+                        ${
+                          index === hotelRating.options.length - 1 &&
+                          "border-none"
+                        }
                   `}
                 >
                   <span className="text-labelMd">{option.label}</span>
-                  <FaStar
-                    className={`${
-                      isSelected ? "text-secondary-500" : "text-secondary-400"
-                    }`}
-                    size={18}
-                  />
+                  <FaStar className={"text-secondary-400"} size={18} />
                 </div>
               );
             })}
