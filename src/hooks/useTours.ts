@@ -1,11 +1,12 @@
 import { useQuery, UseQueryOptions } from "@tanstack/react-query";
-import { Tours } from "@/types/types";
+import { OptionalFilters, Tours } from "@/types/types";
 import {
   fetchToursByTopDiscounts,
   fetchToursByHighestPrice,
   fetchToursByTourType,
   fetchToursByMostPopular,
   fetchToursByCityId,
+  fetchToursWithFilters,
 } from "@/service/data-service";
 // hook for fetching tours by top discount
 export function useFetchToursByTopDiscount(
@@ -60,5 +61,12 @@ export function useFetchToursByCityId(
     queryFn: () => fetchToursByCityId(cityId),
     enabled: !!cityId,
     ...options,
+  });
+}
+// hook for fetching tours by filter
+export function useTours(filters: OptionalFilters) {
+  return useQuery({
+    queryKey: ["tours", filters],
+    queryFn: () => fetchToursWithFilters(filters),
   });
 }

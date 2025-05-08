@@ -10,7 +10,6 @@ import { useState } from "react";
 import { BsListCheck } from "react-icons/bs";
 import { tourFilters } from "@/utils/tourFilters";
 import HotelRatingSelect from "./HotelRatingSelect";
-import SwitchComponent from "./SwitchComponent";
 
 export default function Tours() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -18,7 +17,6 @@ export default function Tours() {
   const Filters = (
     <div className="flex flex-col items-center gap-y-6 w-full md:w-60 lg:w-64 xl:w-72">
       <HotelRatingSelect />
-      <SwitchComponent />
       {tourFilters.map((filter) => (
         <CollapsibleMultiSelect
           key={filter.id}

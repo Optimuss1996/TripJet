@@ -52,11 +52,3 @@ export const hotelRating = {
     { label: "۵", value: "5" },
   ],
 };
-export const isInternational = {
-  id: "isInternational",
-  placeholder: " تور خارجی یا داخلی ",
-  options: [
-    { label: "داخلی", value: false },
-    { label: " خارجی", value: true },
-  ],
-};

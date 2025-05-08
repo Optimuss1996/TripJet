@@ -51,7 +51,7 @@ export default function Header() {
         </div>
       </div>
 
-      <main className=" hidden md:flex w-full h-28 md:px-8 lg:px-14 py-3  text-neutral-white">
+      <main className=" hidden md:flex w-full h-28 md:px-8 lg:px-14 py-3  text-neutral-white border-b border-x-neutral-text-400 border-opacity-70">
         <div className="  flex justify-between items-center w-full">
           <Link to="/" className=" flex justify-center items-center gap-2 ">
             <img src="/logo/Logo.svg" alt="TripJet" />

@@ -94,3 +94,13 @@
 body {
   font-family: "IranSans", sans-serif;
 }
+.swiper-pagination {
+  @apply bg-primary-950;
+}
+
+.swiper-pagination-progressbar {
+  @apply h-10 bg-neutral-text-500 rounded-full;
+}
+.swiper-pagination-progressbar-fill {
+  @apply bg-primary rounded-full;
+}
