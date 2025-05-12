@@ -10,7 +10,6 @@ import {
 import useAuthModal from "../../store/useAuthModal";
 import { useNavigate } from "react-router";
 import { supabase } from "@/lib/supabaseClient";
-import { toast } from "sonner";
 
 export default function AuthModal() {
   const { isOpen, onClose, wasLoggedOut, setWasLoggedOut } = useAuthModal();
@@ -30,14 +29,7 @@ export default function AuthModal() {
       if (event === "SIGNED_IN" && session && !toastShown.current) {
         toastShown.current = true;
 
-        if (session.user?.aud === "authenticated") {
-          toast.success("ورود با موفقیت انجام شد!");
-        } else {
-          toast.success("ثبت‌نام با موفقیت انجام شد!");
-        }
-
         onClose();
-        navigate("/");
       }
     });
 

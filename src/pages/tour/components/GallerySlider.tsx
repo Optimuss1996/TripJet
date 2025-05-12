@@ -19,7 +19,7 @@ export default function GallerySlider({ images }: ToursImages) {
           type: "progressbar",
         }}
         modules={[Pagination]}
-        className="mySwiper  h-56"
+        className="mySwiper  h-64"
       >
         {images.map((image: string, index: number) => (
           <SwiperSlide key={index}>

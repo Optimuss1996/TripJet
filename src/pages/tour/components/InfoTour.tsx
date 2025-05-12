@@ -63,7 +63,7 @@ export default function InfoTour({ tour }: TourProps) {
           {infoIcons.map((item) => (
             <div
               key={item.title}
-              className=" flex items-center gap-2 text-neutral-text-400 text-labelMd md:text-labelLg"
+              className=" flex items-center gap-1 text-neutral-text-400 text-labelMd md:text-labelLg"
             >
               {item.icon}
               <span>{item.title}</span>
@@ -72,30 +72,30 @@ export default function InfoTour({ tour }: TourProps) {
         </div>
 
         <div className=" flex flex-col gap-4 text-labelMd md:text-labelLg">
-          <p className=" flex gap-2 text-neutral-text-500">
+          <p className=" flex gap-1 text-neutral-text-500">
             <span>{startDate.day}</span>
             <span>{startDate.monthName}</span>
             <span>{startDate.year}</span>
           </p>
-          <p className=" flex gap-2 text-neutral-text-500">
+          <p className=" flex gap-1 text-neutral-text-500">
             <span>{endDate.day}</span>
             <span>{endDate.monthName}</span>
             <span>{endDate.year}</span>
           </p>
-          <p className=" flex gap-2 text-neutral-text-500">
+          <p className=" flex gap-1 text-neutral-text-500">
             <span>{convertEnToFaNumbers(tour.duration_days)}</span>
             <span>شب</span>
             <span>هتل</span>
             <span>{convertEnToFaNumbers(tour.hotel_rating)}</span>
             <span>ستاره</span>
           </p>
-          <p className=" flex gap-2 text-neutral-text-500">{tour.tour_type}</p>
-          <p className=" flex gap-2 text-neutral-text-500">
+          <p className=" flex gap-1 text-neutral-text-500">{tour.tour_type}</p>
+          <p className=" flex gap-1 text-neutral-text-500">
             <span>{convertEnToFaNumbers(tour.meal_count)}</span>
             <span>وعده غذایی</span>
           </p>
 
-          <p className=" flex gap-2 text-neutral-text-500 ">
+          <p className=" flex gap-1 text-neutral-text-500 ">
             <span>{convertEnToFaNumbers(tour.difficulty_level)}</span>
             <span>از ۵</span>
           </p>

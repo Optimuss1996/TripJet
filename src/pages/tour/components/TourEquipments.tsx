@@ -17,8 +17,11 @@ export default function TourEquipments() {
       </div>
       <ul className=" flex flex-col gap-2 bg-neutral-white p-4 rounded-lg border border-gray-300 ">
         {items.map((item, idx) => (
-          <li key={idx} className="flex gap-1">
-            <span className="text-xl leading-4">•</span>
+          <li
+            key={idx}
+            className="flex items-center gap-2 text-labelSm md:text-bodyMd"
+          >
+            <span className="text-xl leading-4 text-neutral-text-900">•</span>
             <span>{item}</span>
           </li>
         ))}

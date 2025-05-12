@@ -162,3 +162,33 @@ export async function fetchTourBySlugName(
   }
   return data as Tours;
 }
+// 🚨insert queries🚨 //
+
+// insert reserve tour to booking table
+export async function insertReserveTour(
+  tourId: string,
+  userId: string,
+  numberOfPeople: number,
+  total_price: number,
+  status: "pending" | "confirmed" | "canceled"
+) {
+  const { data, error } = await supabase
+    .from("bookings")
+    .insert([
+      {
+        user_id: userId,
+        tour_id: tourId,
+        number_of_people: numberOfPeople,
+        total_price: total_price,
+        status: status,
+      },
+    ])
+    .select();
+
+  if (error) {
+    console.error("Error inserting reserve tour:", error);
+    throw error;
+  } else {
+    console.log("Inserted reserve tour:", data);
+  }
+}
