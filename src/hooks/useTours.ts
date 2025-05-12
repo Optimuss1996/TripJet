@@ -7,6 +7,7 @@ import {
   fetchToursByMostPopular,
   fetchToursByCityId,
   fetchToursWithFilters,
+  fetchTourBySlugName,
 } from "@/service/data-service";
 // hook for fetching tours by top discount
 export function useFetchToursByTopDiscount(
@@ -68,5 +69,12 @@ export function useTours(filters: OptionalFilters) {
   return useQuery({
     queryKey: ["tours", filters],
     queryFn: () => fetchToursWithFilters(filters),
+  });
+}
+// hook for fetching tours by slugName
+export function useFetchTourBySlugName(tourSlugName: string) {
+  return useQuery({
+    queryKey: ["tour", "slug name"],
+    queryFn: () => fetchTourBySlugName(tourSlugName),
   });
 }

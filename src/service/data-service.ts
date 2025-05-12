@@ -145,3 +145,20 @@ export async function fetchToursWithFilters(
 
   return data as Tours[];
 }
+// fetch tour by Id
+export async function fetchTourBySlugName(
+  tourSlugName: string
+): Promise<Tours> {
+  const { data, error } = await supabase
+    .from("tours")
+    .select("*")
+    .eq("name_slug", tourSlugName)
+    .single();
+
+  if (error) {
+    console.error("Error fetch tour by slug name:", error);
+  } else {
+    console.log("tour by slug name:", data);
+  }
+  return data as Tours;
+}

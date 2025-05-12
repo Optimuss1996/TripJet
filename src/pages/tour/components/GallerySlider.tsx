@@ -3,8 +3,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
+import { ImageWithSkeleton } from "./ImageWithSkeleton";
 
-export default function GallerySlider() {
+interface ToursImages {
+  images: string[];
+}
+
+export default function GallerySlider({ images }: ToursImages) {
   return (
     <>
       <Swiper
@@ -14,37 +19,15 @@ export default function GallerySlider() {
           type: "progressbar",
         }}
         modules={[Pagination]}
-        className="mySwiper  h-48"
+        className="mySwiper  h-56"
       >
-        <SwiperSlide>
-          <img
-            src="/amsterdam-2.webp"
-            alt="Amsterdam"
-            className=" w-full h-full object-cover object-center rounded-lg"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            src="/amsterdam-2.webp"
-            alt="Amsterdam"
-            className="w-full h-full object-cover object-center rounded-lg"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            src="/amsterdam-2.webp"
-            alt="Amsterdam"
-            className="w-full h-full object-cover object-center rounded-lg"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            src="/amsterdam-2.webp"
-            alt="Amsterdam"
-            className="w-full h-full object-cover object-center rounded-lg"
-          />
-        </SwiperSlide>
-        <div className="custom-pagination mt-4 flex justify-center gap-2" />
+        {images.map((image: string, index: number) => (
+          <SwiperSlide key={index}>
+            <ImageWithSkeleton src={image} alt={`Tour Image ${index + 1}`} />
+          </SwiperSlide>
+        ))}
+
+        <div className="custom-pagination  mt-4 flex justify-center gap-2" />
       </Swiper>
     </>
   );
