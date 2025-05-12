@@ -77,8 +77,8 @@ export interface OptionalFilters {
   is_international?: boolean;
   city_id?: string;
   hotel_rating?: number;
-  price_range?: [number, number];
+  price_range?: string;
   tour_type?: string;
-  difficulty_level?: string;
+  difficulty_level?: number;
   tour_rating?: number;
 }

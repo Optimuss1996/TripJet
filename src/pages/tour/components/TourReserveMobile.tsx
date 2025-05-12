@@ -53,7 +53,7 @@ export default function TourReserveMobile({ tour }: TourProps) {
   };
 
   return (
-    <div className="bg-neutral-white fixed sm:hidden bottom-0 left-0 right-0 bg-white p-4 border-t z-50 shadow-[0px_0px_31px_3px_rgba(0,_0,_0,_0.1)]">
+    <div className="bg-neutral-white fixed md:hidden bottom-0 left-0 right-0 bg-white p-4 border-t z-50 shadow-[0px_0px_31px_3px_rgba(0,_0,_0,_0.1)]">
       <div className="flex flex-col gap-3">
         <InputSelect
           numberOfPeople={numberOfPeople}

@@ -65,13 +65,14 @@ export function useFetchToursByCityId(
   });
 }
 // hook for fetching tours by filter
-export function useTours(filters: OptionalFilters) {
+export function useToursByFilter(filters: OptionalFilters) {
   return useQuery({
     queryKey: ["tours", filters],
     queryFn: () => fetchToursWithFilters(filters),
+    // keepPreviousData: true,
   });
 }
-// hook for fetching tours by slugName
+// hook for fetching tour by slugName
 export function useFetchTourBySlugName(tourSlugName: string) {
   return useQuery({
     queryKey: ["tour", "slug name"],

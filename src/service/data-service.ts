@@ -109,42 +109,63 @@ export async function fetchToursByCityId(cityId: string) {
   return data as Tours[];
 }
 // 🚨This query is for fetching data with filters. Please note that these filters are optional🚨
-export async function fetchToursWithFilters(
-  filters: OptionalFilters
-): Promise<Tours[]> {
+export const fetchToursWithFilters = async (filters: OptionalFilters) => {
   let query = supabase.from("tours").select("*");
 
+  const priceRanges = {
+    "0-20000000": { min: 0, max: 300 },
+    "20000000-35000000": { min: 300, max: 600 },
+    "35000000-50000000": { min: 600, max: 800 },
+    "50000000+": { min: 800, max: null },
+  };
+
+  // filter by price range
+  if (filters.price_range && filters.price_range in priceRanges) {
+    const range = priceRanges[filters.price_range as keyof typeof priceRanges];
+    if (range.min !== null) query = query.gte("price", range.min);
+    if (range.max !== null) query = query.lte("price", range.max);
+  }
+
+  // filter by hotel rating
+  if (filters.hotel_rating !== undefined) {
+    query = query.eq("hotel_rating", filters.hotel_rating);
+  }
+
+  // filter by difficulty level
+  if (filters.difficulty_level !== undefined) {
+    query = query.eq("difficulty_level", filters.difficulty_level);
+  }
+
+  // filter by tour type
+  if (filters.tour_type) {
+    query = query.eq("tour_type", filters.tour_type);
+  }
+
+  // filter by tour rating
+  if (filters.tour_rating !== undefined) {
+    query = query.gte("tour_rating", filters.tour_rating);
+  }
+
+  // filter by is international
   if (filters.is_international !== undefined) {
     query = query.eq("is_international", filters.is_international);
   }
 
+  // filter by city id
   if (filters.city_id) {
     query = query.eq("city_id", filters.city_id);
-  }
-
-  if (filters.price_range) {
-    const [min, max] = filters.price_range;
-    query = query.gte("price", min).lte("price", max);
-  }
-
-  if (filters.hotel_rating !== undefined) {
-    query = query.eq("hotel_stars", filters.hotel_rating);
-  }
-
-  if (filters.difficulty_level !== undefined) {
-    query = query.eq("difficulty_level", filters.difficulty_level);
   }
 
   const { data, error } = await query;
 
   if (error) {
-    console.error("Error fetch tours by filters:", error);
-  } else {
-    console.log("tours by filters:", data);
+    console.error("Error fetching filtered tours:", error.message);
+    return [];
   }
 
   return data as Tours[];
-}
+};
+
 // fetch tour by Id
 export async function fetchTourBySlugName(
   tourSlugName: string
