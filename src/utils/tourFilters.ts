@@ -1,6 +1,6 @@
 export const tourFilters = [
   {
-    id: "price",
+    id: "price_range",
     placeholder: " بازه قیمتی تورها",
     options: [
       { label: "از ۰ تا ۲۰ میلیون تومان", value: "0-20000000" },
@@ -10,7 +10,7 @@ export const tourFilters = [
     ],
   },
   {
-    id: "tourType",
+    id: "tour_type",
     placeholder: "   نوع تورها",
     options: [
       { label: "تور طبیعت گردی   ", value: "nature" },
@@ -20,7 +20,7 @@ export const tourFilters = [
     ],
   },
   {
-    id: "level",
+    id: "difficulty_level",
     placeholder: "سطح تور",
     options: [
       { label: "درجه سختی ۱ (سبک)", value: "1" },
@@ -32,7 +32,7 @@ export const tourFilters = [
   },
 
   {
-    id: "rating",
+    id: "tour_rating",
     placeholder: "امتیاز کاربران",
     options: [
       { label: "عالی (امتیاز ۴ به بالا)", value: "5" },
@@ -42,7 +42,7 @@ export const tourFilters = [
   },
 ];
 export const hotelRating = {
-  id: "hotelRating",
+  id: "hotel_rating",
   placeholder: " ستاره هتل",
   options: [
     { label: "۱", value: "1" },

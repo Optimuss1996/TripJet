@@ -8,6 +8,7 @@ import {
   useToursByTourType,
 } from "@/hooks/useTours";
 import { HorizontalSkeleton } from "@/components/common/HorizontalSkeleton";
+import { Link } from "react-router";
 
 const tourTypes = [
   { label: "لوکس ترین", value: "price" },
@@ -91,7 +92,13 @@ export default function CategoryTours() {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {currentTours?.map((tour) => (
-              <SimpleCard key={tour.id} tour={tour} />
+              <Link
+                to={`/tour/${tour.name_slug}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <SimpleCard key={tour.id} tour={tour} />
+              </Link>
             ))}
             )
           </div>

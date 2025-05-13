@@ -3,12 +3,14 @@ import { useCitiesByIsInternational } from "@/hooks/useCities";
 import { useState } from "react";
 import Button from "@/components/common/Button";
 import CitySelector from "./Combobox";
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
+import { useGetCityId } from "@/store/useGetCityId";
 
 export default function FindTour() {
   const [is_international, setIsInternational] = useState<boolean>(true);
+  const selectedCityId = useGetCityId();
+
   const { data } = useCitiesByIsInternational(is_international);
-  const navigate = useNavigate();
   return (
     <main className=" w-11/12 min-h-44 mx-auto relative top-1/2 -translate-y-1/2 bg-neutral-white rounded-lg shadow-lg p-6 shadow-drop">
       <section className="flex w-full justify-start items-center gap-6 text-neutral-text-500 text-labelMd sm:text-labelLg ">
@@ -47,9 +49,14 @@ export default function FindTour() {
           </label>
           <CitySelector cities={data ? data : []} />
         </div>
-        <Link to={`/search`}>
-          <Button className=" px-4 py-2">جستجو</Button>
-        </Link>
+        <Button disabled={!selectedCityId.cityId} className=" px-4 py-2">
+          <Link
+            to={`/search?city_id=${selectedCityId.cityId}`}
+            className=" outline-none border-none focus:border-none "
+          >
+            جستجو
+          </Link>
+        </Button>
       </section>
     </main>
   );

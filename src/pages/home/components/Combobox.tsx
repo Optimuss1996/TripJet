@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import { useGetCityId } from "@/store/useGetCityId";
 import { Cities } from "@/types/types";

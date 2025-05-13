@@ -6,6 +6,7 @@ import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
 import CardDiscount from "@/pages/home/components/CardDiscount";
 import { Tours } from "@/types/types";
+import { Link } from "react-router";
 
 interface ToursProps {
   tours: Tours[] | undefined;
@@ -40,7 +41,13 @@ export default function SliderTopDiscountTours({ tours }: ToursProps) {
       >
         {tours?.map((tour) => (
           <SwiperSlide key={tour.id}>
-            <CardDiscount tour={tour} />
+            <Link
+              to={`/tour/${tour.name_slug}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <CardDiscount tour={tour} />
+            </Link>
           </SwiperSlide>
         ))}
       </Swiper>

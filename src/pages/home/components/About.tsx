@@ -4,7 +4,7 @@ export default function About() {
       <img
         src="/otherImage/about.webp"
         alt="about"
-        className=" object-cover "
+        className=" object-cover  object-center"
       />
     </main>
   );

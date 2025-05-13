@@ -113,10 +113,10 @@ export const fetchToursWithFilters = async (filters: OptionalFilters) => {
   let query = supabase.from("tours").select("*");
 
   const priceRanges = {
-    "0-20000000": { min: 0, max: 300 },
-    "20000000-35000000": { min: 300, max: 600 },
-    "35000000-50000000": { min: 600, max: 800 },
-    "50000000+": { min: 800, max: null },
+    "0-20000000": { min: 0, max: 400 },
+    "20000000-35000000": { min: 400, max: 700 },
+    "35000000-50000000": { min: 700, max: 1000 },
+    "50000000+": { min: 1000, max: null },
   };
 
   // filter by price range

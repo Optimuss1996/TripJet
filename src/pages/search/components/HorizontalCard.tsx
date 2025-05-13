@@ -42,7 +42,7 @@ export default function HorizontalCard({ tour }: TourProp) {
 
         <div className="w-full lg:w-auto flex flex-col lg:flex-row items-start justify-start  lg:items-center lg:justify-between gap-[2px] px-3 py-6 flex-1">
           <section className="w-full lg:w-auto px-3 flex flex-col gap-4">
-            <p className="text-neutral-black text-bodyLg font-semibold">
+            <p className="text-neutral-black text-bodyMd font-semibold truncate md:max-w-44 lg:max-w-96">
               {tour.title}
             </p>
             <div className="flex flex-col gap-2">

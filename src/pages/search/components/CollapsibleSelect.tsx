@@ -27,9 +27,9 @@ export default function CollapsibleMultiSelect({
     const newParams = new URLSearchParams(searchParams.toString());
 
     if (selected === value) {
-      newParams.delete(id); // حذف فیلتر از URL
+      newParams.delete(id);
     } else {
-      newParams.set(id, value); // اضافه کردن فیلتر به URL
+      newParams.set(id, value);
     }
 
     setSearchParams(newParams, { replace: true });

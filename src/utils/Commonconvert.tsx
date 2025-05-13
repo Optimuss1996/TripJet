@@ -2,7 +2,7 @@ import jalaali from "jalaali-js";
 import { toJalaali } from "jalaali-js";
 // convert dollar to toman with comma
 export function convertDollarToToman(priceInDollar: number): string {
-  const toman = priceInDollar * 90000;
+  const toman = priceInDollar * 50000;
   return toman.toLocaleString("fa-IR");
 }
 // convert Miladi date to shamsi date
