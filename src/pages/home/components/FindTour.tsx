@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useCitiesByIsInternational } from "@/hooks/useCities";
+import { useCitiesByIsInternational } from "@/hooks/ReactQuery/useCities";
 import { useState } from "react";
 import Button from "@/components/common/Button";
 import CitySelector from "./Combobox";

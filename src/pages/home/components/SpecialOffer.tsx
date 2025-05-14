@@ -1,5 +1,5 @@
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
-import { useFetchToursByTopDiscount } from "@/hooks/useTours";
+import { useFetchToursByTopDiscount } from "@/hooks/ReactQuery/useTours";
 import VerticalSkeleton from "@/components/common/VerticalSkeleton";
 import SliderTopDiscountTours from "@/pages/home/components/SliderToursItems";
 

@@ -1,4 +1,4 @@
-import { useFetchTourBySlugName } from "@/hooks/useTours";
+import { useFetchTourBySlugName } from "@/hooks/ReactQuery/useTours";
 import InfoTour from "./components/InfoTour";
 import TourGallery from "./components/TourGallery";
 import TourReserve from "./components/TourReserve";

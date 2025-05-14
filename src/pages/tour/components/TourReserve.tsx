@@ -2,7 +2,7 @@ import Button from "@/components/common/Button";
 import InputSelect from "./InputSelect";
 import { Tours } from "@/types/types";
 import { convertDollarToToman } from "@/utils/Commonconvert";
-import { useInsertReserveTour } from "@/hooks/useInsertBooking";
+import { useInsertReserveTour } from "@/hooks/ReactQuery/useInsertBooking";
 import { useAuth } from "@/providers/AuthProvider";
 import { useState } from "react";
 import useAuthModal from "@/store/useAuthModal";

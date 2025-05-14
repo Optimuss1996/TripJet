@@ -3,7 +3,7 @@ import Banner from "./components/Banner";
 
 export default function About() {
   return (
-    <main className="md:px-">
+    <main>
       <Banner />
       <AboutUsComponents />
     </main>

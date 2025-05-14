@@ -52,6 +52,7 @@ export default function CollapsibleMultiSelect({
           )}
         </span>
       </div>
+
       <div
         className={`overflow-hidden overflow-x-auto ${
           open ? "max-h-96 mt-2" : "hidden"

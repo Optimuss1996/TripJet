@@ -6,7 +6,7 @@ import SimpleCard from "./SimpleCard";
 import {
   useFetchToursByHighestPrice,
   useToursByTourType,
-} from "@/hooks/useTours";
+} from "@/hooks/ReactQuery/useTours";
 import { HorizontalSkeleton } from "@/components/common/HorizontalSkeleton";
 import { Link } from "react-router";
 

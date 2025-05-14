@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLocation } from "react-router";
-import { useToursByFilter } from "@/hooks/useTours";
+import { useToursByFilter } from "@/hooks/ReactQuery/useTours";
 import { tourFilters } from "@/utils/tourFilters";
 
 import CollapsibleMultiSelect from "./CollapsibleSelect";

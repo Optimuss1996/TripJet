@@ -1,6 +1,6 @@
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 import { BsChatSquareHeart } from "react-icons/bs";
-import { useFetchToursByMostPopular } from "@/hooks/useTours";
+import { useFetchToursByMostPopular } from "@/hooks/ReactQuery/useTours";
 import VerticalSkeleton from "@/components/common/VerticalSkeleton";
 import SliderPopularTours from "./SliderPopularTours";
 export default function PopularTours() {

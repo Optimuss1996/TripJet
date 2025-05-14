@@ -4,12 +4,16 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Home from "./pages/home/Home";
 import Tour from "./pages/tour/Tour";
 import About from "./pages/about/About";
-import Account from "./pages/account/Account";
 import Checkout from "./pages/checkout/Checkout";
 import Search from "./pages/search/Search";
 import AppLayout from "./layouts/AppLayout";
 import AuthModal from "./components/auth/AuthModal";
 import { Toaster } from "sonner";
+import Profile from "./pages/profile/Profile";
+import Account from "./pages/profile/components/Account";
+import Orders from "./pages/profile/components/Orders";
+import WishList from "./pages/profile/components/WishList";
+import Payments from "./pages/profile/components/Payments";
 function App() {
   const queryClient = new QueryClient();
   return (
@@ -20,7 +24,15 @@ function App() {
             <Route index element={<Home />} />
             <Route path="aboutUs" element={<About />} />
             <Route path="/tour/:slug" element={<Tour />} />
-            <Route path="account" element={<Account />} />
+            <Route path="profile" element={<Profile />}>
+              {/* nested route in profile route */}
+              <Route index element={<Account />} />
+
+              <Route path="account" element={<Account />} />
+              <Route path="orders" element={<Orders />} />
+              <Route path="wishList" element={<WishList />} />
+              <Route path="payments" element={<Payments />} />
+            </Route>
             <Route path="checkout" element={<Checkout />} />
             <Route path="search" element={<Search />} />
           </Route>

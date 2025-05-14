@@ -59,7 +59,9 @@ export default function Header() {
           <div className=" flex justify-center items-center gap-8 text-neutral-black ">
             <p>تور های خارجی</p>
             <p>تور های داخلی</p>
-            <p>بیمه مسافرتی</p>
+            <Link to={"/profile"}>
+              <p className=" cursor-pointer">حساب کاربری</p>
+            </Link>
             <Link to={"/aboutUs"}>
               <p className="hidden lg:block cursor-pointer">درباره ما</p>
             </Link>
