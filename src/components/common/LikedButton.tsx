@@ -41,8 +41,9 @@ export default function LikedButton({ tour }: LikedButtonProps) {
     fetchData();
   }, [user?.id, tour.id]);
 
-  // insert liked tour in favorites table
+  const Icon = isLiked ? FaHeart : CiHeart;
 
+  // insert liked tour in favorites table
   const handleReserveTour = () => {
     if (!session || !user) {
       authModal.onOpen();
@@ -79,7 +80,6 @@ export default function LikedButton({ tour }: LikedButtonProps) {
       );
     }
   };
-  const Icon = isLiked ? FaHeart : CiHeart;
 
   return (
     <span

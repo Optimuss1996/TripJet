@@ -17,7 +17,10 @@ export default function Orders() {
         <Spinner />
       ) : (
         data?.map((item) => (
-          <div className=" p-3 lg:p-4 flex items-center justify-between">
+          <div
+            key={item.id}
+            className=" p-3 lg:p-4 flex items-center justify-between"
+          >
             <div className=" flex  items-center  lg:justify-between gap-5">
               <img
                 src={item.tours.image}

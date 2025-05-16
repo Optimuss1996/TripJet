@@ -1,12 +1,15 @@
-export interface User {
+export interface Users {
   id: string;
   full_name: string;
+  gender: "male" | "female";
   email: string;
   phone_number: string;
   national_code: string;
   birth_date: string;
   city: string;
   avatar_url: string;
+  card_number: number;
+  account_number: number;
   created_at: string;
   updated_at: string;
 }
@@ -83,5 +86,8 @@ export interface OptionalFilters {
   tour_rating?: number;
 }
 export interface BookingWithTour extends Bookings {
+  tours: Tours;
+}
+export interface FavoritesWithTour extends Favorites {
   tours: Tours;
 }

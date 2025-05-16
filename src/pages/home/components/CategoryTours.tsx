@@ -96,8 +96,9 @@ export default function CategoryTours() {
                 to={`/tour/${tour.name_slug}`}
                 target="_blank"
                 rel="noopener noreferrer"
+                key={tour.id}
               >
-                <SimpleCard key={tour.id} tour={tour} />
+                <SimpleCard tour={tour} />
               </Link>
             ))}
             )

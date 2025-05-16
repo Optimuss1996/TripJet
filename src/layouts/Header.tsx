@@ -27,6 +27,14 @@ export default function Header() {
     }
   }
 
+  function handleClick() {
+    if (!session) {
+      onOpen();
+    } else {
+      navigate("/profile/account");
+    }
+  }
+
   return (
     <>
       {/* mobile menu */}
@@ -59,9 +67,9 @@ export default function Header() {
           <div className=" flex justify-center items-center gap-8 text-neutral-black ">
             <p>تور های خارجی</p>
             <p>تور های داخلی</p>
-            <Link to={"/profile"}>
-              <p className=" cursor-pointer">حساب کاربری</p>
-            </Link>
+            <p onClick={handleClick} className=" cursor-pointer">
+              حساب کاربری
+            </p>
             <Link to={"/aboutUs"}>
               <p className="hidden lg:block cursor-pointer">درباره ما</p>
             </Link>

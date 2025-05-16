@@ -10,7 +10,7 @@ import {
   insertLikedTour,
   removeLikedTour,
 } from "@/service/data-service";
-import { Favorites } from "@/types/types";
+import { FavoritesWithTour } from "@/types/types";
 
 type InsertParams = {
   tourId: string;
@@ -50,12 +50,14 @@ export function useRemoveLikedTour() {
 // fetch liked tours by userId
 export function useFetchLikedToursByUserId(
   userId: string | undefined,
-  options?: UseQueryOptions<Favorites[], Error>
+  isInternational: boolean,
+  options?: UseQueryOptions<FavoritesWithTour[], Error>
 ) {
-  return useQuery<Favorites[], Error>({
-    queryKey: ["favorites", userId],
-    queryFn: () => fetchFavoritesByUserId(userId!),
-    enabled: !!userId,
+  const isEnabled = !!userId && typeof isInternational === "boolean";
+  return useQuery<FavoritesWithTour[], Error>({
+    queryKey: ["favorites", userId, isInternational],
+    queryFn: () => fetchFavoritesByUserId(userId!, isInternational),
+    enabled: !!isEnabled,
     ...options,
   });
 }

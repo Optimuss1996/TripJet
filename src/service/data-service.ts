@@ -2,9 +2,10 @@ import { supabase } from "@/lib/supabaseClient";
 import {
   BookingWithTour,
   Cities,
-  Favorites,
+  FavoritesWithTour,
   OptionalFilters,
   Tours,
+  Users,
 } from "@/types/types";
 
 // fetch all cities
@@ -207,22 +208,49 @@ export async function fetchReserveTour(
   }
   return data as BookingWithTour[];
 }
-// fetch most popular tours
+// fetch Favorites tours By User Id and also filter by is_international tours
 export async function fetchFavoritesByUserId(
-  userId: string
-): Promise<Favorites[]> {
-  const { data, error } = await supabase
+  userId: string,
+  isInternational?: boolean
+): Promise<FavoritesWithTour[]> {
+  let query = supabase
     .from("favorites")
-    .select("*")
+    .select("*, tours!inner(*)")
     .eq("user_id", userId);
+
+  if (typeof isInternational === "boolean") {
+    query = query.eq("tours.is_international", isInternational);
+  }
+
+  const { data, error } = await query;
 
   if (error) {
     console.error("Error fetch liked tours by userId:", error);
-    throw Error;
+    throw error;
   } else {
     console.log("liked tours by userId:", data);
   }
-  return data as Favorites[];
+
+  return data as FavoritesWithTour[];
+}
+// update users table
+export async function updateUser(userId: string, userData: Users) {
+  if (!userId || !userData || Object.keys(userData).length === 0) {
+    throw new Error("invalid update parameters");
+  }
+
+  const { error } = await supabase
+    .from("users")
+    .update(userData)
+    .eq("id", userId);
+
+  if (error) {
+    console.error("Error updating user:", error.message);
+    throw error;
+  } else {
+    console.log("update user successful");
+  }
+  return true;
 }
 //
 //
