@@ -183,6 +183,24 @@ export async function fetchTourBySlugName(
   }
   return data as Tours;
 }
+
+// fetch reserve tour
+export async function fetchReserveTour(
+  userId: string
+): Promise<BookingWithTour[]> {
+  const { data, error } = await supabase
+    .from("bookings")
+    .select("*, tours(*)")
+    .eq("user_id", userId);
+
+  if (error) {
+    console.error("Error fetch reserve tour by userId:", error);
+    throw error;
+  } else {
+    console.log("reserve tour by userId:", data);
+  }
+  return data as BookingWithTour[];
+}
 // 🚨insert queries🚨 //
 
 // insert reserve tour to booking table
@@ -213,20 +231,22 @@ export async function insertReserveTour(
     console.log("Inserted reserve tour:", data);
   }
 }
-// fetch reserve tour
-export async function fetchReserveTour(
-  userId: string
-): Promise<BookingWithTour[]> {
+// insert liked tour to favorites table
+export async function insertLikedTour(tourId: string, userId: string) {
   const { data, error } = await supabase
-    .from("bookings")
-    .select("*, tours(*)")
-    .eq("user_id", userId);
+    .from("favorites")
+    .insert([
+      {
+        user_id: userId,
+        tour_id: tourId,
+      },
+    ])
+    .select();
 
   if (error) {
-    console.error("Error fetch reserve tour by userId:", error);
+    console.error("Error inserting liked tour:", error);
     throw error;
   } else {
-    console.log("reserve tour by userId:", data);
+    console.log("inserted favorites tour:", data);
   }
-  return data as BookingWithTour[];
 }

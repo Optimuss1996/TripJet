@@ -82,3 +82,6 @@ export interface OptionalFilters {
   difficulty_level?: number;
   tour_rating?: number;
 }
+export interface BookingWithTour extends Bookings {
+  tours: Tours;
+}

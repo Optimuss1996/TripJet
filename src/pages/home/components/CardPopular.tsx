@@ -1,3 +1,4 @@
+import LikedButton from "@/components/common/LikedButton";
 import { Tours } from "@/types/types";
 import {
   convertDollarToToman,
@@ -5,7 +6,6 @@ import {
   convertGregorianToPersianWithNumbers,
 } from "@/utils/Commonconvert";
 import { LucideCalendarCheck } from "lucide-react";
-import { CiHeart } from "react-icons/ci";
 import { MdOutlineWatchLater } from "react-icons/md";
 import { TiStarFullOutline } from "react-icons/ti";
 interface TourProps {
@@ -21,9 +21,7 @@ export default function CardPopular({ tour }: TourProps) {
           alt="photoTour"
           className=" rounded-md object-cover h-full w-full"
         />
-        <span className=" absolute bg-primary-400 p-1 top-2 right-2 rounded-md cursor-pointer hover:opacity-60 transition duration-300">
-          <CiHeart className=" text-primary-50" size={20} />
-        </span>
+        <LikedButton tour={tour} />
 
         <div className=" absolute bottom-2 right-2 flex justify-start gap-2 text-labelMd">
           <div className=" flex gap-1 justify-start ">
