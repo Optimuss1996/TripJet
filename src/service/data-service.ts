@@ -1,5 +1,11 @@
 import { supabase } from "@/lib/supabaseClient";
-import { BookingWithTour, Cities, OptionalFilters, Tours } from "@/types/types";
+import {
+  BookingWithTour,
+  Cities,
+  Favorites,
+  OptionalFilters,
+  Tours,
+} from "@/types/types";
 
 // fetch all cities
 export async function fetchAllCities(): Promise<Cities[]> {
@@ -166,7 +172,7 @@ export const fetchToursWithFilters = async (filters: OptionalFilters) => {
   return data as Tours[];
 };
 
-// fetch tour by Id
+// fetch tour by tour slug name
 export async function fetchTourBySlugName(
   tourSlugName: string
 ): Promise<Tours> {
@@ -201,6 +207,31 @@ export async function fetchReserveTour(
   }
   return data as BookingWithTour[];
 }
+// fetch most popular tours
+export async function fetchFavoritesByUserId(
+  userId: string
+): Promise<Favorites[]> {
+  const { data, error } = await supabase
+    .from("favorites")
+    .select("*")
+    .eq("user_id", userId);
+
+  if (error) {
+    console.error("Error fetch liked tours by userId:", error);
+    throw Error;
+  } else {
+    console.log("liked tours by userId:", data);
+  }
+  return data as Favorites[];
+}
+//
+//
+//
+//
+//
+//
+//
+//
 // 🚨insert queries🚨 //
 
 // insert reserve tour to booking table
@@ -248,5 +279,20 @@ export async function insertLikedTour(tourId: string, userId: string) {
     throw error;
   } else {
     console.log("inserted favorites tour:", data);
+  }
+}
+// insert liked tour to favorites table
+export async function removeLikedTour(tourId: string, userId: string) {
+  const { data, error } = await supabase
+    .from("favorites")
+    .delete()
+    .eq("user_id", userId)
+    .eq("tour_id", tourId);
+
+  if (error) {
+    console.error("Error remove liked tour:", error);
+    throw error;
+  } else {
+    console.log("remove favorites tour:", data);
   }
 }

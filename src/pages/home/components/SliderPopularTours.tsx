@@ -6,7 +6,6 @@ import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
 import { Tours } from "@/types/types";
 import CardPopular from "./CardPopular";
-import { Link } from "react-router";
 
 interface ToursProps {
   tours: Tours[] | undefined;
@@ -41,13 +40,7 @@ export default function SliderPopularTours({ tours }: ToursProps) {
       >
         {tours?.map((tour) => (
           <SwiperSlide key={tour.id}>
-            <Link
-              to={`/tour/${tour.name_slug}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <CardPopular tour={tour} />
-            </Link>
+            <CardPopular tour={tour} />
           </SwiperSlide>
         ))}
       </Swiper>

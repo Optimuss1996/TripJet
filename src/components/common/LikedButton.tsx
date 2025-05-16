@@ -2,19 +2,26 @@ import { useAuth } from "@/providers/AuthProvider";
 import { supabase } from "@/lib/supabaseClient";
 import { useEffect, useState } from "react";
 import { CiHeart } from "react-icons/ci";
-import { FaHeartbeat } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 import { Tours } from "@/types/types";
 import { cn } from "@/lib/utils";
 import useAuthModal from "@/store/useAuthModal";
+import {
+  useInsertLikedTour,
+  useRemoveLikedTour,
+} from "@/hooks/ReactQuery/useLiked";
+import { toast } from "sonner";
 
 interface LikedButtonProps {
   tour: Tours;
 }
 
 export default function LikedButton({ tour }: LikedButtonProps) {
-  const { user } = useAuth();
+  const { user, session } = useAuth();
   const [isLiked, setIsLiked] = useState<boolean>(false);
   const authModal = useAuthModal();
+  const { mutate } = useInsertLikedTour();
+  const { mutate: removeMutation } = useRemoveLikedTour();
   // checking the existence of tour in the favorites table
   useEffect(() => {
     if (!user?.id) return;
@@ -34,19 +41,53 @@ export default function LikedButton({ tour }: LikedButtonProps) {
     fetchData();
   }, [user?.id, tour.id]);
 
-  const Icon = isLiked ? FaHeartbeat : CiHeart;
-  async function handleClick() {
-    if (!user) {
-      return authModal.onOpen();
+  // insert liked tour in favorites table
+
+  const handleReserveTour = () => {
+    if (!session || !user) {
+      authModal.onOpen();
+      return;
     }
-  }
+    if (!isLiked) {
+      mutate(
+        {
+          tourId: tour.id,
+          userId: user?.id,
+        },
+        {
+          onSuccess: () => {
+            setIsLiked(true);
+            toast.success("تور به علاقه مندی ها اضافه شد");
+          },
+          onError: () => toast.error("خطا در عملیات"),
+        }
+      );
+    }
+    if (isLiked) {
+      removeMutation(
+        {
+          tourId: tour.id,
+          userId: user?.id,
+        },
+        {
+          onSuccess: () => {
+            setIsLiked(false);
+            toast.success("تور از علاقه مندی ها حذف شد");
+          },
+          onError: () => toast.error("خطا در عملیات"),
+        }
+      );
+    }
+  };
+  const Icon = isLiked ? FaHeart : CiHeart;
+
   return (
     <span
-      onClick={handleClick}
+      onClick={handleReserveTour}
       className={cn(
         "absolute p-1 top-2 right-2 rounded-md cursor-pointer",
         "hover:opacity-60 transition duration-300",
-        isLiked ? "bg-primary-50" : "bg-primary"
+        isLiked ? "bg-primary-50 p-1" : "bg-primary"
       )}
     >
       <Icon
