@@ -45,7 +45,7 @@ export default function JalaliDatePicker() {
   useEffect(() => {
     if (year && month) {
       const monthIndex = months.indexOf(month) + 1;
-      const { gy } = jalaali.toGregorian(parseInt(year), monthIndex, 1);
+      // const { gy } = jalaali.toGregorian(parseInt(year), monthIndex, 1);
       const days = jalaali.jalaaliMonthLength(parseInt(year), monthIndex);
       const result = Array.from({ length: days }, (_, i) => i + 1);
       setDaysInMonth(result);

@@ -1,5 +1,5 @@
 import { supabase } from "@/lib/supabaseClient";
-import { Cities, OptionalFilters, Tours } from "@/types/types";
+import { BookingWithTour, Cities, OptionalFilters, Tours } from "@/types/types";
 
 // fetch all cities
 export async function fetchAllCities(): Promise<Cities[]> {
@@ -212,4 +212,21 @@ export async function insertReserveTour(
   } else {
     console.log("Inserted reserve tour:", data);
   }
+}
+// fetch reserve tour
+export async function fetchReserveTour(
+  userId: string
+): Promise<BookingWithTour[]> {
+  const { data, error } = await supabase
+    .from("bookings")
+    .select("*, tours(*)")
+    .eq("user_id", userId);
+
+  if (error) {
+    console.error("Error fetch reserve tour by userId:", error);
+    throw error;
+  } else {
+    console.log("reserve tour by userId:", data);
+  }
+  return data as BookingWithTour[];
 }
