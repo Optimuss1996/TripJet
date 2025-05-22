@@ -8,8 +8,8 @@ export interface Users {
   birth_date: string;
   city: string;
   avatar_url: string;
-  card_number: number;
-  account_number: number;
+  card_number: string;
+  account_number: string;
   created_at: string;
   updated_at: string;
 }

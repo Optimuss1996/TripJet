@@ -256,6 +256,24 @@ export async function updateUser(userId: string, userData: Users) {
 //
 //
 //
+export async function fetchUsersById(id: string) {
+  if (!id) {
+    throw new Error("User ID is required to fetch user data.");
+  }
+
+  const { data, error } = await supabase
+    .from("users")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (error || !data) {
+    throw new Error(error?.message || "User not found.");
+  }
+
+  return data as Users;
+}
+
 //
 //
 //

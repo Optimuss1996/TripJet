@@ -5,8 +5,8 @@ export function convertDollarToToman(priceInDollar: number): string {
   const toman = priceInDollar * 50000;
   return toman.toLocaleString("fa-IR");
 }
-// convert Miladi date to shamsi date
 
+// convert Miladi date to shamsi date
 const persianMonths = [
   "فروردین",
   "اردیبهشت",
@@ -51,6 +51,12 @@ export function convertEnToFaNumbers(input: string | number): string {
 //
 //
 //
+export function convertFaToEnNumbers(input: string): string {
+  const enDigits = "0123456789";
+  const faDigits = "۰۱۲۳۴۵۶۷۸۹";
+
+  return input.replace(/[۰-۹]/g, (w) => enDigits[faDigits.indexOf(w)]);
+}
 
 // تابع تبدیل میلادی به شمسی و اعداد به فارسی
 export function convertGregorianToPersianWithNumbers(dateStr: string) {

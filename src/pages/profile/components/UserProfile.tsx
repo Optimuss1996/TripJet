@@ -1,15 +1,23 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useFetchUsersById } from "@/hooks/ReactQuery/useUsers";
+import { useAuth } from "@/providers/AuthProvider";
 import { convertEnToFaNumbers } from "@/utils/Commonconvert";
 import { BiEdit } from "react-icons/bi";
 import { RiUserLine } from "react-icons/ri";
 
 export default function UserProfile() {
+  const { user } = useAuth();
+  const userId = user?.id;
+  const { data } = useFetchUsersById(userId || "", {
+    enabled: !!userId,
+  });
+
   return (
     <div className=" flex items-center justify-around gap-1 bg-neutral-white border border-neutral-400 rounded-lg px-3 py-4">
       <Avatar>
         <AvatarImage
           className=""
-          src="https://github.com/shadcn.png"
+          src={data?.avatar_url || "https://github.com/shadcn.png"}
           alt="@shadcn"
         />
         <AvatarFallback>

@@ -13,7 +13,7 @@ export default function Dashboard() {
           <Button className=" bg-error-100 text-error-500 px-6 py-4">
             <div className=" flex justify-center items-center gap-1">
               <IoExitOutline className=" text-error-500  " size={24} />
-              <span>خروج از حساب کاربری</span>
+              <span>خرید از حساب کاربری</span>
             </div>
           </Button>
         </aside>
