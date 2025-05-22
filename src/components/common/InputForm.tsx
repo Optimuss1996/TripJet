@@ -15,6 +15,7 @@ interface FormInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   isNumeric?: boolean;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  error?: string;
 }
 
 const InputForm = ({
@@ -25,6 +26,7 @@ const InputForm = ({
   isNumeric = false,
   value,
   onChange,
+  error,
   ...props
 }: FormInputProps) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -50,6 +52,7 @@ const InputForm = ({
         className={cn(
           "absolute z-10 right-4 -top-1 bg-neutral-white px-2 text-labelSm md:text-labelMd text-neutral-text-400",
           isFocused && "text-primary",
+          error && "text-error-500",
           labelClassName
         )}
       >
@@ -68,6 +71,7 @@ const InputForm = ({
             isFocused
               ? "border border-primary"
               : "border border-neutral-text-200",
+            error && "border-error-500",
             "!ring-0 !focus-visible:ring-0",
             inputClassName
           )}

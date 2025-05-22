@@ -54,15 +54,27 @@ export default function BankInfoSection({
             <Controller
               name="card_number"
               control={control}
-              render={({ field }) => (
-                <InputForm label="شماره کارت" {...field} isNumeric />
+              render={({ field, fieldState }) => (
+                <InputForm
+                  label="شماره کارت"
+                  value={field.value}
+                  onChange={field.onChange}
+                  error={fieldState.error?.message}
+                  isNumeric
+                />
               )}
             />
             <Controller
               name="account_number"
               control={control}
-              render={({ field }) => (
-                <InputForm label=" شماره حساب" {...field} isNumeric />
+              render={({ field, fieldState }) => (
+                <InputForm
+                  label=" شماره حساب"
+                  value={field.value}
+                  onChange={field.onChange}
+                  error={fieldState.error?.message}
+                  isNumeric
+                />
               )}
             />
           </div>

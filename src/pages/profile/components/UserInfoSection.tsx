@@ -67,16 +67,27 @@ export default function UserInfoSection({
             <Controller
               name="full_name"
               control={control}
-              render={({ field }) => (
-                <InputForm label="نام و نام خانوادگی" {...field} />
+              render={({ field, fieldState }) => (
+                <InputForm
+                  label="نام و نام خانوادگی"
+                  value={field.value}
+                  onChange={field.onChange}
+                  error={fieldState.error?.message}
+                />
               )}
             />
 
             <Controller
               name="phone_number"
               control={control}
-              render={({ field }) => (
-                <InputForm label="تلفن همراه" isNumeric {...field} />
+              render={({ field, fieldState }) => (
+                <InputForm
+                  label="تلفن همراه"
+                  value={field.value}
+                  onChange={field.onChange}
+                  isNumeric
+                  error={fieldState.error?.message}
+                />
               )}
             />
           </div>

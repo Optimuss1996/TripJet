@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/select";
 import { convertEnToFaNumbers } from "@/utils/Commonconvert";
 import { ChevronDown } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const months = [
   "فروردین",
@@ -36,11 +37,13 @@ const generateYears = () => {
 interface InputDatePickerProps {
   value?: string; // expected format: "YYYY-MM-DD" in Gregorian
   onChange: (value: string) => void;
+  error?: string;
 }
 
 export default function InputDatePicker({
   value,
   onChange,
+  error,
 }: InputDatePickerProps) {
   const [year, setYear] = useState<string | undefined>();
   const [month, setMonth] = useState<string | undefined>();
@@ -85,7 +88,12 @@ export default function InputDatePicker({
   }, [year, month, day, onChange]);
 
   return (
-    <div className="flex items-center justify-between h-14 border border-neutral-text-200 rounded-lg w-full relative px-2 gap-2">
+    <div
+      className={cn(
+        error && "border-error-500",
+        "flex items-center justify-between h-14 border border-neutral-text-200 rounded-lg w-full relative px-2 gap-2"
+      )}
+    >
       <span className="absolute right-4 -top-3 bg-white z-10 text-neutral-text-400 bg-neutral-white px-2">
         تاریخ تولد
       </span>

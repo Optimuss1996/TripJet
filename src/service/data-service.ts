@@ -7,6 +7,7 @@ import {
   Tours,
   Users,
 } from "@/types/types";
+import { UserSchemaType } from "@/utils/userSchema";
 
 // fetch all cities
 export async function fetchAllCities(): Promise<Cities[]> {
@@ -340,5 +341,25 @@ export async function removeLikedTour(tourId: string, userId: string) {
     throw error;
   } else {
     console.log("remove favorites tour:", data);
+  }
+}
+
+// 🚨 update 🚨
+
+// update users table
+export async function updateUserProfile(
+  userId: string,
+  updatedFields: Partial<UserSchemaType>
+) {
+  if (!userId) {
+    throw new Error("userId not correct");
+  }
+  const { error } = await supabase
+    .from("users")
+    .update(updatedFields)
+    .eq("id", userId);
+
+  if (error) {
+    throw new Error("خطا در بروزرسانی اطلاعات کاربر");
   }
 }

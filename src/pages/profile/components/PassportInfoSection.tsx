@@ -57,18 +57,25 @@ export default function PassportInfoSection({
             <Controller
               name="birth_date"
               control={control}
-              render={({ field }) => (
+              render={({ field, fieldState }) => (
                 <InputDatePicker
                   value={field.value}
                   onChange={field.onChange}
+                  error={fieldState.error?.message}
                 />
               )}
             />
             <Controller
               name="national_code"
               control={control}
-              render={({ field }) => (
-                <InputForm label="کد ملی" {...field} isNumeric />
+              render={({ field, fieldState }) => (
+                <InputForm
+                  label="کد ملی"
+                  value={field.value}
+                  onChange={field.onChange}
+                  error={fieldState.error?.message}
+                  isNumeric
+                />
               )}
             />
           </div>
