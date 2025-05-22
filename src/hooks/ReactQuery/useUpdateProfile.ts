@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { toast } from "sonner"; // یا هر کتابخونه Toast دیگه
+import { toast } from "sonner";
 import { UserSchemaType } from "@/utils/userSchema";
 import { supabase } from "@/lib/supabaseClient"; // مسیرش با پروژه‌ت سازگار باشه
 
