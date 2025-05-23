@@ -1,16 +1,8 @@
+// hooks/ReactQuery/useUpdateUserProfile.ts
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { UserSchemaType } from "@/utils/userSchema";
-import { supabase } from "@/lib/supabaseClient"; // مسیرش با پروژه‌ت سازگار باشه
-
-const updateUserProfile = async (userId: string, values: UserSchemaType) => {
-  const { error } = await supabase
-    .from("users")
-    .update(values)
-    .eq("id", userId);
-
-  if (error) throw new Error(error.message);
-};
+import { updateUserProfile } from "@/service/data-service";
 
 export const useUpdateUserProfile = () => {
   const queryClient = useQueryClient();
@@ -23,13 +15,11 @@ export const useUpdateUserProfile = () => {
       userId: string;
       values: UserSchemaType;
     }) => updateUserProfile(userId, values),
-
     onSuccess: () => {
       toast.success("اطلاعات با موفقیت بروزرسانی شد.");
-      queryClient.invalidateQueries({ queryKey: ["users"] }); // یا ["users", userId]
+      queryClient.invalidateQueries({ queryKey: ["users"] });
     },
-
-    onError: (error: any) => {
+    onError: (error) => {
       toast.error("خطا در بروزرسانی اطلاعات: " + error.message);
     },
   });

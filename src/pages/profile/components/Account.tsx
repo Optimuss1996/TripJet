@@ -9,6 +9,7 @@ import BankInfoSection from "./BankInfoSection";
 import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { userSchema, UserSchemaType } from "@/utils/userSchema";
+import { useUpdateUserProfile } from "@/hooks/ReactQuery/useUpdateProfile";
 
 export default function Account() {
   const [isEditing, setIsEditing] = useState(false);
@@ -18,6 +19,8 @@ export default function Account() {
   const { data, isLoading, isError } = useFetchUsersById(userId ?? "", {
     enabled: !!userId,
   });
+
+  const updateUserProfile = useUpdateUserProfile();
 
   const methods = useForm<UserSchemaType>({
     resolver: zodResolver(userSchema),
@@ -32,7 +35,6 @@ export default function Account() {
     },
   });
 
-  //🚨 Because the data is conditionally fetched, we can't use it directly in useForm for the default value, so we used useEffect.
   useEffect(() => {
     if (data) {
       methods.reset({
@@ -48,7 +50,17 @@ export default function Account() {
   }, [data, methods]);
 
   const onSubmit = (values: UserSchemaType) => {
-    console.log("مقادیر نهایی فرم:", values);
+    if (!userId) return;
+
+    updateUserProfile.mutate(
+      { userId, values },
+      {
+        onSuccess: () => {
+          methods.reset(values);
+          setIsEditing(false);
+        },
+      }
+    );
   };
 
   if (!userId) return <div>ورود کاربر انجام نشده است</div>;

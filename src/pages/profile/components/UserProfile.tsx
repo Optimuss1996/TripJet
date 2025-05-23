@@ -26,9 +26,9 @@ export default function UserProfile() {
       </Avatar>
 
       <div className="flex flex-col justify-center items-center gap-2 text-labelLg">
-        <p>علی صلاحی</p>
+        <p>{data?.full_name}</p>
         <p className="text-neutral-text-400 text-labelMd">
-          {convertEnToFaNumbers("09129863210")}
+          {convertEnToFaNumbers(data?.phone_number as string)}
         </p>
       </div>
 

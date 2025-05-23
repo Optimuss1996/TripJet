@@ -42,10 +42,27 @@ export function convertGregorianToPersian(dateStr: string): {
   };
 }
 // convert english number to persian number
-export function convertEnToFaNumbers(input: string | number): string {
-  const faDigits = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
-  return input.toString().replace(/\d/g, (d) => faDigits[parseInt(d)]);
+export function convertEnToFaNumbers(input?: string | number | null): string {
+  if (input === null || input === undefined) return "";
+
+  const value = input.toString();
+
+  const enToFaMap: Record<string, string> = {
+    "0": "۰",
+    "1": "۱",
+    "2": "۲",
+    "3": "۳",
+    "4": "۴",
+    "5": "۵",
+    "6": "۶",
+    "7": "۷",
+    "8": "۸",
+    "9": "۹",
+  };
+
+  return value.replace(/[0-9]/g, (digit) => enToFaMap[digit] || digit);
 }
+
 //
 //
 //
