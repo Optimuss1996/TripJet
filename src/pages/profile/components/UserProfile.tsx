@@ -13,7 +13,7 @@ export default function UserProfile() {
   });
 
   return (
-    <div className=" flex items-center justify-around gap-1 bg-neutral-white border border-neutral-400 rounded-lg px-3 py-4">
+    <div className=" flex items-center justify-between md:justify-around gap-1 bg-neutral-white border border-neutral-400 rounded-lg px-3 py-4">
       <Avatar>
         <AvatarImage
           className=""
@@ -25,7 +25,7 @@ export default function UserProfile() {
         </AvatarFallback>
       </Avatar>
 
-      <div className="flex flex-col justify-center items-center gap-2 text-labelLg">
+      <div className="flex flex-col sm:flex-row md:flex-col justify-center items-center gap-2 sm:gap-4 md:gap-2 text-labelLg">
         <p>{data?.full_name}</p>
         <p className="text-neutral-text-400 text-labelMd">
           {convertEnToFaNumbers(data?.phone_number as string)}
