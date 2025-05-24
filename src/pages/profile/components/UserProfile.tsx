@@ -1,12 +1,14 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useFetchUsersById } from "@/hooks/ReactQuery/useUsers";
 import { useAuth } from "@/providers/AuthProvider";
+import useProfileModalMobile from "@/store/useProfileMobileModal";
 import { convertEnToFaNumbers } from "@/utils/Commonconvert";
 import { BiEdit } from "react-icons/bi";
 import { RiUserLine } from "react-icons/ri";
 
 export default function UserProfile() {
   const { user } = useAuth();
+  const { onOpen } = useProfileModalMobile();
   const userId = user?.id;
   const { data } = useFetchUsersById(userId || "", {
     enabled: !!userId,
@@ -25,14 +27,14 @@ export default function UserProfile() {
         </AvatarFallback>
       </Avatar>
 
-      <div className="flex flex-col sm:flex-row md:flex-col justify-center items-center gap-2 sm:gap-4 md:gap-2 text-labelLg">
+      <div className="flex flex-col sm:flex-row md:flex-col justify-center items-center gap-2 sm:gap-8 md:gap-2 text-labelLg">
         <p>{data?.full_name}</p>
         <p className="text-neutral-text-400 text-labelMd">
           {convertEnToFaNumbers(data?.phone_number as string)}
         </p>
       </div>
 
-      <BiEdit className=" text-primary opacity-80" size={24} />
+      <BiEdit onClick={onOpen} className=" text-primary opacity-80" size={24} />
     </div>
   );
 }
