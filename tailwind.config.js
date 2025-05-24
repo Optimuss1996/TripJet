@@ -5,6 +5,14 @@ export default {
   darkMode: ["class"],
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    extend: {
+      height: {
+        "screen-dynamic": "100dvh",
+      },
+      width: {
+        "width-dynamic": "100dvw",
+      },
+    },
     fontFamily: {
       yekan: ["Yekan Bakh", "sans-serif"],
     },
