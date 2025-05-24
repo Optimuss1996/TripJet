@@ -41,6 +41,9 @@ export default function MobileMenuSheet() {
           <Link to="/" className=" pb-2 border-b border-b-primary-200">
             درباره ما
           </Link>
+          <Link to="/profile" className=" pb-2 border-b border-b-primary-200">
+            حساب کاربری
+          </Link>
         </nav>
       </SheetContent>
     </Sheet>
