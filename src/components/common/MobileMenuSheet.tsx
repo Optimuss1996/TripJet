@@ -18,7 +18,7 @@ export default function MobileMenuSheet() {
       </SheetTrigger>
       <SheetOverlay className="bg-neutral-black opacity-50" />
 
-      <SheetContent side="right" className=" w-2/3 md:hidden">
+      <SheetContent side="right" className=" w-3/4 md:hidden">
         <SheetHeader className="mt-6">
           <Link
             to="/"

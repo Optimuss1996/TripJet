@@ -14,6 +14,10 @@ import Account from "./pages/profile/components/Account";
 import Orders from "./pages/profile/components/Orders";
 import WishList from "./pages/profile/components/WishList";
 import Payments from "./pages/profile/components/Payments";
+import SelectPassengers from "./pages/checkout/components/SelectPassengers";
+import Review from "./pages/checkout/components/Review";
+import Payment from "./pages/checkout/components/Payment";
+import Ticket from "./pages/checkout/components/Ticket";
 function App() {
   const queryClient = new QueryClient();
   return (
@@ -33,7 +37,16 @@ function App() {
               <Route path="wishList" element={<WishList />} />
               <Route path="payments" element={<Payments />} />
             </Route>
-            <Route path="checkout" element={<Checkout />} />
+
+            <Route path="checkout" element={<Checkout />}>
+              {/* nested route in profile route */}
+              <Route index element={<SelectPassengers />} />
+
+              <Route path="select-passengers" element={<SelectPassengers />} />
+              <Route path="review" element={<Review />} />
+              <Route path="payment" element={<Payment />} />
+              <Route path="ticket" element={<Ticket />} />
+            </Route>
             <Route path="search" element={<Search />} />
           </Route>
         </Routes>

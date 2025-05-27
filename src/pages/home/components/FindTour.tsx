@@ -12,7 +12,7 @@ export default function FindTour() {
 
   const { data } = useCitiesByIsInternational(is_international);
   return (
-    <main className=" w-11/12 min-h-44 mx-auto relative top-1/2 -translate-y-1/2 bg-neutral-white rounded-lg shadow-lg p-6 shadow-drop">
+    <main className=" w-11/12 min-h-44 mx-auto relative top-1/2 -translate-y-1/2 bg-neutral-white rounded-lg shadow-lg p-6 shadow-drop z-50">
       <section className="flex w-full justify-start items-center gap-6 text-neutral-text-500 text-labelMd sm:text-labelLg ">
         <p
           onClick={() => setIsInternational(true)}

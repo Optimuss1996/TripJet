@@ -36,7 +36,7 @@ export default function CitySelector({ cities }: CitiesProps) {
     <div className="relative w-full " ref={containerRef}>
       <div
         onClick={() => setShowList((prev) => !prev)}
-        className="flex items-center justify-between w-full border border-gray-300 focus:border-primary rounded-md px-3 py-2 bg-white cursor-pointer "
+        className="flex items-center justify-between w-full border border-gray-300 focus:border-primary rounded-md px-3 py-2 bg-white cursor-pointer z-50"
       >
         <input
           type="text"

@@ -53,7 +53,9 @@ export default function Header() {
           <Button onClick={onOpen} className=" px-2 py-1">
             <div className=" flex justify-center items-center gap-1">
               <BiLogInCircle className=" text-primary-50 text-titleMd" />
-              <span className=" text-neutral-white font-normal">ورود</span>
+              <span className=" text-neutral-white font-normal">
+                {session ? "خروج" : " ورود "}
+              </span>
             </div>
           </Button>
         </div>

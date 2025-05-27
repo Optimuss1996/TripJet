@@ -1,4 +1,5 @@
 import Button from "@/components/common/Button";
+import LikedButton from "@/components/common/LikedButton";
 import { Tours } from "@/types/types";
 import {
   convertDollarToToman,
@@ -7,7 +8,7 @@ import {
 } from "@/utils/Commonconvert";
 import { LucideCalendarCheck } from "lucide-react";
 import { BsInfoCircleFill } from "react-icons/bs";
-import { CiHeart, CiHome } from "react-icons/ci";
+import { CiHome } from "react-icons/ci";
 import { LiaMugHotSolid } from "react-icons/lia";
 import { MdOutlineWatchLater } from "react-icons/md";
 import { PiUsers } from "react-icons/pi";
@@ -29,9 +30,8 @@ export default function HorizontalCard({ tour }: TourProp) {
             alt="tourPhoto"
             className=" rounded-lg object-cover h-full w-full"
           />
-          <span className=" absolute bg-primary-400 p-1 top-2 right-2 rounded-md cursor-pointer hover:opacity-60 transition duration-300">
-            <CiHeart className=" text-primary-50" size={20} />
-          </span>
+          <LikedButton tour={tour} />
+
           <div className=" lg:hidden absolute bottom-2 right-2 flex justify-between items-center gap-2  px-3 py-1 bg-primary-50 text-primary font-light   rounded-md">
             <BsInfoCircleFill className=" text-primary " size={16} />
             <p className=" text-labelMd">
