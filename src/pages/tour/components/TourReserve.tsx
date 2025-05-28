@@ -8,28 +8,36 @@ import { useState } from "react";
 import useAuthModal from "@/store/useAuthModal";
 import { toast } from "sonner";
 import { FaCheck } from "react-icons/fa";
+import { useRequireAuth } from "@/hooks/useRequireAuth";
 
 interface TourProps {
   tour: Tours;
 }
 
 export default function TourReserve({ tour }: TourProps) {
-  const { session, user } = useAuth();
+  const { user } = useAuth();
   const modal = useAuthModal();
   const [numberOfPeople, setNumberOfPeople] = useState<number | null>(null);
-  const { mutate, isError, isPending, isSuccess } = useInsertReserveTour();
+  const { mutate, isPending, isSuccess } = useInsertReserveTour();
+  const { isAuthenticated } = useRequireAuth();
   const total_price = (numberOfPeople as number) * tour.price;
 
   const handleReserveTour = () => {
-    if (!session || !user) {
+    if (!isAuthenticated) {
       modal.onOpen();
       return;
     }
+
+    if (!numberOfPeople) {
+      toast.error("لطفا تعداد مسافران را انتخاب کنید");
+      return;
+    }
+
     mutate(
       {
         tourId: tour.id,
-        userId: user?.id,
-        numberOfPeople: numberOfPeople as number,
+        userId: user?.id as string,
+        numberOfPeople: numberOfPeople,
         total_price,
         status: "pending",
       },
@@ -53,53 +61,42 @@ export default function TourReserve({ tour }: TourProps) {
   };
 
   return (
-    <div>
-      <div
-        className=" hidden md:block border border-neutral-text-200 rounded-lg bg-neutral-white w-full sm:w-64 lg:w-96
-     px-4 py-3  "
-      >
-        <section className="flex items-start flex-col gap-4">
-          <span className=" text-bodyMd lg:text-bodyLg">
-            تعداد نفرات خود را وارد کنید.
-          </span>
-          <span className=" text-labelMd text-neutral-text-400">
-            {tour.title}
-          </span>
-        </section>
-
-        <section className=" flex flex-col gap-5 mt-8">
-          <InputSelect
-            numberOfPeople={numberOfPeople}
-            setNumberOfPeople={setNumberOfPeople}
-            remainingCapacity={tour.remaining_capacity}
-          />
-          <div className="flex items-center justify-center gap-4 w-full text-neutral-text-400 text-labelLg">
-            <span className="text-neutral-black">قیمت برای هر مسافر</span>
-            <span className="text-primary">
-              {convertDollarToToman(tour.price)}
-            </span>
-            <span className="text-labelMd">تومان</span>
-          </div>
-          <Button
-            disabled={!numberOfPeople || isPending}
-            onClick={() => handleReserveTour()}
-            className=" w-full px-3 py-2"
-          >
-            {isPending ? (
-              "در حال رزرو تور..."
-            ) : isSuccess ? (
-              <div className="flex justify-center items-center gap-2">
-                <FaCheck size={20} />
-                رزرو با موفقیت انجام شد
-              </div>
-            ) : isError ? (
-              "خطا در ثبت اطلاعات"
-            ) : (
-              "رزرو تور"
-            )}
-          </Button>
-        </section>
+    <div className="flex flex-col gap-4 p-4 border border-neutral-400 rounded-lg">
+      <div className="flex justify-between items-center">
+        <span className="text-neutral-text-500">تعداد مسافران:</span>
+        <InputSelect
+          value={numberOfPeople}
+          onChange={setNumberOfPeople}
+          maxCapacity={tour.remaining_capacity}
+        />
       </div>
+      {numberOfPeople && (
+        <div className="flex justify-between items-center">
+          <span className="text-neutral-text-500">قیمت کل:</span>
+          <div className="flex items-center gap-2">
+            <span className="text-primary">
+              {convertDollarToToman(total_price)}
+            </span>
+            <span className="text-neutral-text-500">تومان</span>
+          </div>
+        </div>
+      )}
+      <Button
+        onClick={handleReserveTour}
+        disabled={!numberOfPeople || isPending}
+        className="w-full flex justify-center items-center gap-2"
+      >
+        {isPending ? (
+          "در حال پردازش..."
+        ) : isSuccess ? (
+          <>
+            <FaCheck />
+            رزرو شد
+          </>
+        ) : (
+          "رزرو تور"
+        )}
+      </Button>
     </div>
   );
 }

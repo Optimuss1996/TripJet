@@ -18,6 +18,8 @@ import SelectPassengers from "./pages/checkout/components/SelectPassengers";
 import Review from "./pages/checkout/components/Review";
 import Payment from "./pages/checkout/components/Payment";
 import Ticket from "./pages/checkout/components/Ticket";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
+
 function App() {
   const queryClient = new QueryClient();
   return (
@@ -28,44 +30,55 @@ function App() {
             <Route index element={<Home />} />
             <Route path="aboutUs" element={<About />} />
             <Route path="/tour/:slug" element={<Tour />} />
-            <Route path="profile" element={<Profile />}>
-              {/* nested route in profile route */}
-              <Route index element={<Account />} />
 
+            {/* Protected Routes */}
+            <Route
+              path="profile"
+              element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              }
+            >
+              <Route index element={<Account />} />
               <Route path="account" element={<Account />} />
               <Route path="orders" element={<Orders />} />
               <Route path="wishList" element={<WishList />} />
               <Route path="payments" element={<Payments />} />
             </Route>
 
-            <Route path="checkout" element={<Checkout />}>
-              {/* nested route in profile route */}
+            <Route
+              path="checkout"
+              element={
+                <ProtectedRoute>
+                  <Checkout />
+                </ProtectedRoute>
+              }
+            >
               <Route index element={<SelectPassengers />} />
-
               <Route path="select-passengers" element={<SelectPassengers />} />
               <Route path="review" element={<Review />} />
               <Route path="payment" element={<Payment />} />
               <Route path="ticket" element={<Ticket />} />
             </Route>
+
             <Route path="search" element={<Search />} />
           </Route>
         </Routes>
         <AuthModal />
-
         <Toaster
           position="top-center"
           richColors
+          className=" z-50 absolute top-0 left-0 right-0 bottom-0"
           duration={4000}
           toastOptions={{
             style: {
-              // background: "#12b76a",
-              // color: "#ffffff",
               fontFamily: "IranSans, sans-serif",
               fontWeight: 600,
               borderRadius: "12px",
               boxShadow: "0 6px 14px rgba(0,0,0,0.1)",
               padding: "16px 20px",
-              fontSize: "20px",
+              fontSize: "16px",
               width: "fit-content",
             },
           }}

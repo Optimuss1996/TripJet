@@ -8,13 +8,11 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import useAuthModal from "../../store/useAuthModal";
-import { useNavigate } from "react-router";
 import { supabase } from "@/lib/supabaseClient";
 
 export default function AuthModal() {
   const { isOpen, onClose, wasLoggedOut, setWasLoggedOut } = useAuthModal();
 
-  const navigate = useNavigate();
   const toastShown = useRef(false);
 
   useEffect(() => {
@@ -36,13 +34,20 @@ export default function AuthModal() {
     return () => {
       subscription.unsubscribe();
     };
-  }, [onClose, navigate, wasLoggedOut, setWasLoggedOut]);
+  }, [onClose, wasLoggedOut, setWasLoggedOut]);
 
   return (
-    <Dialog open={isOpen} onOpenChange={(open) => (open ? null : onClose())}>
+    <Dialog
+      open={isOpen}
+      onOpenChange={(open) => {
+        if (!open) onClose();
+      }}
+    >
       <DialogOverlay className="bg-neutral-black opacity-70" />
       <DialogContent className="w-full h-screen md:h-auto md:max-w-md">
-        <DialogTitle className="text-center mt-3">خوش اومدین</DialogTitle>
+        <DialogTitle className="text-center mt-3 text-primary">
+          خوش اومدین
+        </DialogTitle>
         <Auth
           supabaseClient={supabase}
           appearance={{
@@ -55,6 +60,12 @@ export default function AuthModal() {
                   inputBorder: "#005ff0",
                   inputText: "#0c0c0c",
                 },
+                fonts: {
+                  bodyFontFamily: `"IranSans", sans-serif`,
+                  buttonFontFamily: `"IranSans", sans-serif`,
+                  inputFontFamily: `"IranSans", sans-serif`,
+                  labelFontFamily: `"IranSans", sans-serif`,
+                },
               },
             },
           }}
@@ -65,11 +76,20 @@ export default function AuthModal() {
                 email_label: "ایمیل",
                 password_label: "رمز عبور",
                 button_label: "ورود",
+                loading_button_label: "در حال ورود...",
+                email_input_placeholder: "ایمیل خود را وارد کنید",
+                password_input_placeholder: "رمز عبور خود را وارد کنید",
               },
               sign_up: {
                 email_label: "ایمیل",
                 password_label: "رمز عبور",
                 button_label: "ثبت نام",
+                email_input_placeholder: "ایمیل خود را وارد کنید",
+                password_input_placeholder: "رمز عبور خود را وارد کنید",
+              },
+              forgotten_password: {
+                button_label: "بازیابی رمز عبور",
+                loading_button_label: "در حال ارسال لینک بازیابی...",
               },
             },
           }}

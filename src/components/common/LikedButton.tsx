@@ -22,6 +22,7 @@ export default function LikedButton({ tour }: LikedButtonProps) {
   const authModal = useAuthModal();
   const { mutate } = useInsertLikedTour();
   const { mutate: removeMutation } = useRemoveLikedTour();
+
   // checking the existence of tour in the favorites table
   useEffect(() => {
     if (!user?.id) return;
@@ -44,16 +45,20 @@ export default function LikedButton({ tour }: LikedButtonProps) {
   const Icon = isLiked ? FaHeart : CiHeart;
 
   // insert liked tour in favorites table
-  const handleReserveTour = () => {
-    if (!session || !user) {
+  const handleReserveTour = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (!session) {
       authModal.onOpen();
       return;
     }
+
     if (!isLiked) {
       mutate(
         {
           tourId: tour.id,
-          userId: user?.id,
+          userId: user?.id as string,
         },
         {
           onSuccess: () => {
@@ -68,7 +73,7 @@ export default function LikedButton({ tour }: LikedButtonProps) {
       removeMutation(
         {
           tourId: tour.id,
-          userId: user?.id,
+          userId: user?.id as string,
         },
         {
           onSuccess: () => {

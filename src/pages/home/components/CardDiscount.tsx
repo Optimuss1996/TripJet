@@ -7,7 +7,6 @@ import {
 } from "@/utils/Commonconvert";
 import { LucideCalendarCheck } from "lucide-react";
 import { MdOutlineWatchLater } from "react-icons/md";
-import { Link } from "react-router";
 
 interface TourProps {
   tour: Tours;
@@ -41,47 +40,36 @@ export default function CardDiscount({ tour }: TourProps) {
           </div>
         </div>
       </section>
-      <Link
-        to={`/tour/${tour.name_slug}`}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <section className=" flex flex-col gap-3 px-3 py-4 h-2/5 cursor-pointer">
-          <p className="text-neutral-black font-medium">{tour.title}</p>
 
-          <div className=" flex flex-col gap-2 text-neutral-text-500 text-labelMd">
-            <div className=" flex justify-start items-center gap-2">
-              <MdOutlineWatchLater
-                className="text-neutral-text-500"
-                size={20}
-              />
-              <p>
-                {convertEnToFaNumbers(tour.duration_days + 1)} شب و{" "}
-                {convertEnToFaNumbers(tour.duration_days)} روز
-              </p>
-            </div>
-            <div className=" flex justify-start items-center gap-2">
-              <LucideCalendarCheck
-                className="text-neutral-text-500"
-                size={18}
-              />
-              <p className=" flex gap-1">
-                <span>{startDate.day}</span>
-                <span>{startDate.monthName}</span>
-                <span>{startDate.year}</span>
-              </p>
-            </div>
-          </div>
+      <section className=" flex flex-col gap-3 px-3 py-4 h-2/5 cursor-pointer">
+        <p className="text-neutral-black font-medium">{tour.title}</p>
 
-          <div className="flex justify-between text-neutral-text-500 text-labelMd mt-4">
-            <p>شروع قیمت از </p>
-            <div className=" flex justify-center items-center gap-2">
-              <p className="text-primary">{convertDollarToToman(tour.price)}</p>
-              <p className=" text-labelSm">تومان</p>
-            </div>
+        <div className=" flex flex-col gap-2 text-neutral-text-500 text-labelMd">
+          <div className=" flex justify-start items-center gap-2">
+            <MdOutlineWatchLater className="text-neutral-text-500" size={20} />
+            <p>
+              {convertEnToFaNumbers(tour.duration_days + 1)} شب و{" "}
+              {convertEnToFaNumbers(tour.duration_days)} روز
+            </p>
           </div>
-        </section>
-      </Link>
+          <div className=" flex justify-start items-center gap-2">
+            <LucideCalendarCheck className="text-neutral-text-500" size={18} />
+            <p className=" flex gap-1">
+              <span>{startDate.day}</span>
+              <span>{startDate.monthName}</span>
+              <span>{startDate.year}</span>
+            </p>
+          </div>
+        </div>
+
+        <div className="flex justify-between text-neutral-text-500 text-labelMd mt-4">
+          <p>شروع قیمت از </p>
+          <div className=" flex justify-center items-center gap-2">
+            <p className="text-primary">{convertDollarToToman(tour.price)}</p>
+            <p className=" text-labelSm">تومان</p>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
