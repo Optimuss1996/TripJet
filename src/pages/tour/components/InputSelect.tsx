@@ -4,15 +4,15 @@ import { FaChevronDown } from "react-icons/fa";
 import { FiUsers } from "react-icons/fi";
 
 interface InputSelectProps {
-  value: number | null;
-  onChange: (value: number) => void;
-  maxCapacity: number;
+  numberOfPeople: number | null;
+  setNumberOfPeople: React.Dispatch<React.SetStateAction<number | null>>;
+  remainingCapacity: number;
 }
 
 export default function InputSelect({
-  value,
-  onChange,
-  maxCapacity,
+  numberOfPeople,
+  setNumberOfPeople,
+  remainingCapacity,
 }: InputSelectProps) {
   const [showList, setShowList] = useState(false);
   const [openDirection, setOpenDirection] = useState<"up" | "down">("down");
@@ -44,7 +44,7 @@ export default function InputSelect({
     setShowList((prev) => !prev);
   };
 
-  const maxSelectable = Math.min(5, maxCapacity);
+  const maxSelectable = Math.min(5, remainingCapacity);
   const options = Array.from({ length: maxSelectable }, (_, i) => i + 1);
 
   return (
@@ -56,7 +56,9 @@ export default function InputSelect({
         <input
           type="text"
           readOnly
-          value={value ? `${convertEnToFaNumbers(value)} نفر` : ""}
+          value={
+            numberOfPeople ? `${convertEnToFaNumbers(numberOfPeople)} نفر` : ""
+          }
           className="outline-none flex-1 bg-neutral-white text-right h-9 text-primary placeholder:text-gray-400"
           placeholder="تعداد نفرات را انتخاب کنید"
         />
@@ -65,7 +67,7 @@ export default function InputSelect({
 
       {showList && (
         <ul
-          className={`absolute z-50 w-full bg-neutral-white border border-gray-300 rounded-md max-h-60 overflow-y-auto shadow-xl px-2 py-1 shadow-[0px_8px_30px_rgba(0,_95,_240,_0.25)] transition-all duration-200 ${
+          className={`absolute z-50 w-full bg-neutral-white border border-gray-300 rounded-md max-h-60 overflow-y-auto shadow-md px-2 py-1 shadow-[0px_0px_31px_3px_rgba(0,_0,_0,_0.1)] transition-all duration-200 ${
             openDirection === "up" ? "bottom-full mb-1" : "mt-1"
           }`}
         >
@@ -73,7 +75,7 @@ export default function InputSelect({
             <li
               key={option}
               onClick={() => {
-                onChange(option);
+                setNumberOfPeople(option);
                 setShowList(false);
               }}
               className="px-4 py-2 text-gray-700 group hover:bg-primary-50 cursor-pointer text-right transition"
