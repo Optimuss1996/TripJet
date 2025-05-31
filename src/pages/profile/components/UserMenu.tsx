@@ -4,6 +4,7 @@ import { MdOutlinePayment } from "react-icons/md";
 import { IoIosArrowBack } from "react-icons/io";
 import { Link } from "react-router";
 import { useState } from "react";
+import { FaUserFriends } from "react-icons/fa";
 
 const menu = [
   {
@@ -22,6 +23,11 @@ const menu = [
     route: "wishlist",
   },
   {
+    icon: FaUserFriends,
+    label: "  مسافر ها",
+    route: "passengers",
+  },
+  {
     icon: MdOutlinePayment,
     label: "تراکنش ها",
     route: "payments",
@@ -30,7 +36,7 @@ const menu = [
 
 export default function UserMenu() {
   const [clicked, setClicked] = useState<string | null>("account");
-
+  console.log("UserMenu rendered");
   return (
     <div className="bg-neutral-white border border-neutral-400 rounded-lg px-3 py-2">
       {menu.map((item) => {

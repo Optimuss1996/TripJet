@@ -10,7 +10,7 @@ import { toast } from "sonner";
 import { supabase } from "@/lib/supabaseClient";
 
 export default function Header() {
-  const { onOpen, setWasLoggedOut } = useAuthModal();
+  const { onOpen, onClose } = useAuthModal();
   const { session } = useAuth();
   const navigate = useNavigate();
   async function handleLogOut() {
@@ -18,12 +18,11 @@ export default function Header() {
 
     if (error) {
       toast.error("خروج با خطا مواجه شد!");
-      setWasLoggedOut(true);
       console.error(error.message);
       navigate("/");
     } else {
       toast.success(" خارج شدید ");
-      setWasLoggedOut(true);
+      onClose();
     }
   }
 
@@ -50,7 +49,10 @@ export default function Header() {
         </div>
 
         <div className=" flex justify-center items-center gap-5 text-labelSm">
-          <Button onClick={onOpen} className=" px-2 py-1">
+          <Button
+            onClick={session ? handleLogOut : onOpen}
+            className=" px-2 py-1"
+          >
             <div className=" flex justify-center items-center gap-1">
               <BiLogInCircle className=" text-primary-50 text-titleMd" />
               <span className=" text-neutral-white font-normal">

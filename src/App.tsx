@@ -19,6 +19,7 @@ import Review from "./pages/checkout/components/Review";
 import Payment from "./pages/checkout/components/Payment";
 import Ticket from "./pages/checkout/components/Ticket";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
+import Passengers from "./pages/profile/components/Passengers";
 
 function App() {
   const queryClient = new QueryClient();
@@ -45,6 +46,7 @@ function App() {
               <Route path="orders" element={<Orders />} />
               <Route path="wishList" element={<WishList />} />
               <Route path="payments" element={<Payments />} />
+              <Route path="passengers" element={<Passengers />} />
             </Route>
 
             <Route

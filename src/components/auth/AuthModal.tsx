@@ -11,16 +11,11 @@ import useAuthModal from "../../store/useAuthModal";
 import { supabase } from "@/lib/supabaseClient";
 
 export default function AuthModal() {
-  const { isOpen, onClose, wasLoggedOut, setWasLoggedOut } = useAuthModal();
+  const { isOpen, onClose } = useAuthModal();
 
   const toastShown = useRef(false);
 
   useEffect(() => {
-    if (wasLoggedOut) {
-      toastShown.current = false;
-      setWasLoggedOut(false);
-    }
-
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event, session) => {
@@ -34,7 +29,7 @@ export default function AuthModal() {
     return () => {
       subscription.unsubscribe();
     };
-  }, [onClose, wasLoggedOut, setWasLoggedOut]);
+  }, [onClose]);
 
   return (
     <Dialog
@@ -44,7 +39,7 @@ export default function AuthModal() {
       }}
     >
       <DialogOverlay className="bg-neutral-black opacity-70" />
-      <DialogContent className="w-full h-screen md:h-auto md:max-w-md">
+      <DialogContent className="w-screen h-svh md:h-auto md:max-w-md">
         <DialogTitle className="text-center mt-3 text-primary">
           خوش اومدین
         </DialogTitle>

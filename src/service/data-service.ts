@@ -4,6 +4,7 @@ import {
   Cities,
   FavoritesWithTour,
   OptionalFilters,
+  Passengers,
   Tours,
   Users,
 } from "@/types/types";
@@ -274,7 +275,25 @@ export async function fetchUsersById(id: string) {
 
   return data as Users;
 }
+//
+//
+//
+//
+export async function fetchPassengersByUserId(id: string) {
+  if (!id) {
+    throw new Error("User ID is required to fetch passengers data.");
+  }
+  const { data, error } = await supabase
+    .from("passengers")
+    .select("*")
+    .eq("user_id", id);
 
+  if (error) {
+    console.error("Error fetching passengers by userId:", error);
+    throw error;
+  }
+  return data as Passengers[];
+}
 //
 //
 //
@@ -343,7 +362,24 @@ export async function removeLikedTour(tourId: string, userId: string) {
     console.log("remove favorites tour:", data);
   }
 }
+//
+//
+//
+//
+// 🚨insert passengers🚨 //
+export async function insertPassengers(passengers: Passengers[]) {
+  const { data, error } = await supabase
+    .from("passengers")
+    .insert(passengers)
+    .select();
 
+  if (error) {
+    console.error("Error inserting passengers:", error);
+    throw error;
+  }
+  return data;
+}
+//
 // 🚨 update 🚨
 
 // update users table

@@ -14,6 +14,8 @@ export default function UserProfile() {
     enabled: !!userId,
   });
 
+  console.log("UserProfile rendered");
+
   return (
     <div className=" flex items-center justify-between md:justify-around gap-1 bg-neutral-white border border-neutral-400 rounded-lg px-3 py-4">
       <Avatar>

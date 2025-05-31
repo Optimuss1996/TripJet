@@ -85,6 +85,15 @@ export interface OptionalFilters {
   difficulty_level?: number;
   tour_rating?: number;
 }
+export interface Passengers {
+  id: string;
+  user_id: string;
+  full_name: string;
+  national_code: string;
+  birth_date: string;
+  is_account_own: boolean;
+  created_at: string;
+}
 export interface BookingWithTour extends Bookings {
   tours: Tours;
 }
