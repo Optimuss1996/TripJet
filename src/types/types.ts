@@ -91,7 +91,6 @@ export interface Passengers {
   full_name: string;
   national_code: string;
   birth_date: string;
-  is_account_own: boolean;
   created_at: string;
 }
 export interface BookingWithTour extends Bookings {

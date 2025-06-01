@@ -367,10 +367,17 @@ export async function removeLikedTour(tourId: string, userId: string) {
 //
 //
 // 🚨insert passengers🚨 //
-export async function insertPassengers(passengers: Passengers[]) {
+type InsertParams = {
+  user_id: string;
+  full_name: string;
+  birth_date: string;
+  national_code: string;
+};
+
+export async function insertPassengers(params: InsertParams) {
   const { data, error } = await supabase
     .from("passengers")
-    .insert(passengers)
+    .insert(params)
     .select();
 
   if (error) {

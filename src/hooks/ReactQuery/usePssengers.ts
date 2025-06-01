@@ -2,7 +2,6 @@ import {
   useQuery,
   useMutation,
   UseQueryOptions,
-  UseMutationOptions,
   useQueryClient,
 } from "@tanstack/react-query";
 import {
@@ -28,14 +27,19 @@ export function useFetchPassengersByUserId(
 }
 
 // 🚨insert passengers🚨 //
-export function useInsertPassengers(
-  passengers: Passengers[],
-  options?: UseMutationOptions<Passengers[], Error>
-) {
+
+type InsertParams = {
+  user_id: string;
+  full_name: string;
+  birth_date: string;
+  national_code: string;
+};
+
+export function useInsertPassengers() {
   const queryClient = useQueryClient();
+
   return useMutation({
-    mutationFn: () => insertPassengers(passengers),
-    ...options,
+    mutationFn: (params: InsertParams) => insertPassengers(params),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["passengers"] });
     },

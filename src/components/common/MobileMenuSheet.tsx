@@ -28,12 +28,19 @@ export default function MobileMenuSheet() {
           </Link>
         </SheetHeader>
         <nav className="flex flex-col gap-4 mt-6 text-primary">
-          <Link to="/" className=" pb-2 border-b border-b-primary-200">
-            تورهای خارجی
+          <Link
+            to={`/search?is_international=true`}
+            className=" cursor-pointer pb-2 border-b border-b-primary-200"
+          >
+            تور های خارجی
           </Link>
-          <Link to="/" className=" pb-2 border-b border-b-primary-200">
-            تورهای داخلی
+          <Link
+            to={`/search?is_international=false`}
+            className=" cursor-pointer pb-2 border-b border-b-primary-200"
+          >
+            تور های داخلی
           </Link>
+
           <Link to="/" className=" pb-2 border-b border-b-primary-200">
             بیمه مسافرتی
           </Link>

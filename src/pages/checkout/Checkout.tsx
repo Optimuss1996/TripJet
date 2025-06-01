@@ -1,64 +1,68 @@
-import { Outlet, useLocation } from "react-router";
-import Stepper from "@/pages/checkout/components/Stepper";
+// import { Outlet, useLocation } from "react-router";
+// import Stepper from "@/pages/checkout/components/Stepper";
 
-const steps = [
-  { path: "select-passengers", label: "مشخصات" },
-  { path: "review", label: "تایید اطلاعات" },
-  { path: "payment", label: "پرداخت" },
-  { path: "ticket", label: "صدور بلیط" },
-];
-
-export default function CheckpointLayout() {
-  const location = useLocation();
-  const currentStep = steps.findIndex((step) =>
-    location.pathname.includes(step.path)
-  );
-
-  return (
-    <div className="container mx-auto p-4 bg-primary-50 min-h-screen">
-      {/* سکشن ثابت Stepper */}
-      <section className="mb-8">
-        <Stepper
-          steps={[
-            { label: "انتخاب تور", path: "/checkpoint/select-tour" },
-            { label: "مشخصات مسافران", path: "/checkpoint/passengers" },
-            { label: "تأیید اطلاعات", path: "/checkpoint/review" },
-            { label: "پرداخت", path: "/checkpoint/payment" },
-            { label: "صدور بلیت", path: "/checkpoint/ticket" },
-          ]}
-          currentStep={currentStep}
-        />
-        ;
-      </section>
-
-      {/* بخش متغیر: محتوای مراحل با توجه به Route */}
-      <section>
-        <Outlet />
-      </section>
-    </div>
-  );
+export default function Checkout() {
+  return <div>Checkout</div>;
 }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+// const steps = [
+//   { path: "select-passengers", label: "مشخصات" },
+//   { path: "review", label: "تایید اطلاعات" },
+//   { path: "payment", label: "پرداخت" },
+//   { path: "ticket", label: "صدور بلیط" },
+// ];
+
+// export default function CheckpointLayout() {
+//   const location = useLocation();
+//   const currentStep = steps.findIndex((step) =>
+//     location.pathname.includes(step.path)
+//   );
+
+//   return (
+//     <div className="container mx-auto p-4 bg-primary-50 min-h-screen">
+//       {/* سکشن ثابت Stepper */}
+//       <section className="mb-8">
+//         <Stepper
+//           steps={[
+//             { label: "انتخاب تور", path: "/checkpoint/select-tour" },
+//             { label: "مشخصات مسافران", path: "/checkpoint/passengers" },
+//             { label: "تأیید اطلاعات", path: "/checkpoint/review" },
+//             { label: "پرداخت", path: "/checkpoint/payment" },
+//             { label: "صدور بلیت", path: "/checkpoint/ticket" },
+//           ]}
+//           currentStep={currentStep}
+//         />
+//         ;
+//       </section>
+
+//       {/* بخش متغیر: محتوای مراحل با توجه به Route */}
+//       <section>
+//         <Outlet />
+//       </section>
+//     </div>
+//   );
+// }
+
+// //
+// //
+// //
+// //
+// //
+// //
+// //
+// //
+// //
+// //
+// //
+// //
+// //
+// //
+// //
+// //
+// //
+// //
+// //
+// //
 
 // <div className=" w-full bg-primary-50 min-h-screen pt-3 pb-7">
 //   <div className=" flex justify-center items-center">
@@ -110,4 +114,4 @@ export default function CheckpointLayout() {
 //   <div className=" flex items-center justify-center gap-4 mt-6">
 //     <Button className=" px-8 py-2">ادامه خرید</Button>
 //   </div>
-// </div>
+// </div>;

@@ -12,3 +12,12 @@ export const userSchema = z.object({
 
 // اگر می‌خوای ازش تایپ هم بگیری:
 export type UserSchemaType = z.infer<typeof userSchema>;
+
+export const passengerSchema = z.object({
+  full_name: z.string().min(3, "حداقل ۳ کاراکتر"),
+  birth_date: z.string().min(10, "تاریخ تولد نامعتبر است"),
+  national_code: z.string().regex(/^\d{10}$/, "کد ملی باید ۱۰ رقم باشد"),
+  user_id: z.string().uuid("شناسه کاربر نامعتبر است"),
+});
+
+export type PassengerSchemaType = z.infer<typeof passengerSchema>;

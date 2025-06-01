@@ -69,8 +69,18 @@ export default function Header() {
             <img src="/logo/Logo.svg" alt="TripJet" />
           </Link>
           <div className=" flex justify-center items-center gap-8 text-neutral-black ">
-            <p>تور های خارجی</p>
-            <p>تور های داخلی</p>
+            <Link
+              to={`/search?is_international=true`}
+              className=" cursor-pointer"
+            >
+              تور های خارجی
+            </Link>
+            <Link
+              to={`/search?is_international=false`}
+              className=" cursor-pointer"
+            >
+              تور های داخلی
+            </Link>
             <p onClick={handleClick} className=" cursor-pointer">
               حساب کاربری
             </p>
