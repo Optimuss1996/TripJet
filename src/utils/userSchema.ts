@@ -14,6 +14,7 @@ export const userSchema = z.object({
 export type UserSchemaType = z.infer<typeof userSchema>;
 
 export const passengerSchema = z.object({
+  id: z.string().uuid("شناسه مسافر نامعتبر است").optional(),
   full_name: z.string().min(3, "حداقل ۳ کاراکتر"),
   birth_date: z.string().min(10, "تاریخ تولد نامعتبر است"),
   national_code: z.string().regex(/^\d{10}$/, "کد ملی باید ۱۰ رقم باشد"),

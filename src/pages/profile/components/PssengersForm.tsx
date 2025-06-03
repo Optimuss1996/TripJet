@@ -2,17 +2,33 @@ import Button from "@/components/common/Button";
 import InputDatePicker from "@/components/common/InputDatePicker";
 import InputForm from "@/components/common/InputForm";
 import { useAuth } from "@/providers/AuthProvider";
-import { useInsertPassengers } from "@/hooks/ReactQuery/usePssengers";
+import {
+  useInsertPassengers,
+  useUpdatePassengers,
+} from "@/hooks/ReactQuery/usePssengers";
 import { PassengerSchemaType, passengerSchema } from "@/utils/userSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import usePassengersModal from "@/store/usePassengersModal";
 import { toast } from "sonner";
-export default function PssengersForm() {
+import { useEffect } from "react";
+
+interface PssengersFormProps {
+  mode?: "create" | "edit";
+  passengerData?: PassengerSchemaType;
+  onDelete?: () => void;
+}
+
+export default function PssengersForm({
+  mode = "create",
+  passengerData,
+  onDelete,
+}: PssengersFormProps) {
   const { user } = useAuth();
   const userId = user?.id;
   const { onClose } = usePassengersModal();
   const { mutate: createPassenger } = useInsertPassengers();
+  const { mutate: updatePassenger } = useUpdatePassengers();
 
   const methods = useForm<PassengerSchemaType>({
     resolver: zodResolver(passengerSchema),
@@ -23,38 +39,73 @@ export default function PssengersForm() {
       user_id: userId,
     },
   });
+
+  useEffect(() => {
+    if (mode === "edit" && passengerData) {
+      methods.reset({
+        full_name: passengerData.full_name,
+        birth_date: passengerData.birth_date,
+        national_code: passengerData.national_code,
+        user_id: userId,
+      });
+    }
+  }, [mode, passengerData, methods, userId]);
+
   const onSubmit = (values: PassengerSchemaType) => {
-    console.log("✅ SUBMITTED VALUES:", values);
     if (!userId) return;
 
-    createPassenger(
-      {
-        full_name: values.full_name,
-        birth_date: values.birth_date,
-        national_code: values.national_code,
-        user_id: userId,
-      },
-      {
-        onSuccess: () => {
-          methods.reset(values);
-          onClose();
-          toast.success("مسافر با موفقیت اضافه شد");
+    if (mode === "create") {
+      createPassenger(
+        {
+          full_name: values.full_name,
+          birth_date: values.birth_date,
+          national_code: values.national_code,
+          user_id: userId,
         },
-        onError: (error) => {
-          toast.error("خطایی رخ داده است");
-          console.log(error.message);
+        {
+          onSuccess: () => {
+            methods.reset(values);
+            onClose();
+            toast.success("مسافر با موفقیت اضافه شد");
+          },
+          onError: (error) => {
+            toast.error("خطایی رخ داده است");
+            console.log(error.message);
+          },
+        }
+      );
+    } else if (passengerData?.id) {
+      updatePassenger(
+        {
+          passengerId: passengerData.id,
+          values: {
+            full_name: values.full_name,
+            birth_date: values.birth_date,
+            national_code: values.national_code,
+            user_id: userId,
+          },
         },
-      }
-    );
-    console.log("📨 SUBMIT TRIGGERED"); // اضافه کن برای تست
+        {
+          onSuccess: () => {
+            methods.reset(values);
+            onClose();
+            toast.success("مسافر با موفقیت ویرایش شد");
+          },
+          onError: (error) => {
+            toast.error("خطایی رخ داده است");
+            console.log(error.message);
+          },
+        }
+      );
+    }
   };
 
   return (
-    <div className=" mt-6 min-h-[185px] w-11/12 mx-auto  rounded-lg p-2 lg:p-4 bg-neutral-white">
+    <div className="mt-6 min-h-[185px] w-11/12 mx-auto rounded-lg p-2 lg:p-4 bg-neutral-white">
       <div>
         <form
           onSubmit={methods.handleSubmit(onSubmit)}
-          className=" flex  flex-col gap-8 "
+          className="flex flex-col gap-8"
         >
           <Controller
             name="full_name"
@@ -101,10 +152,19 @@ export default function PssengersForm() {
             />
           </div>
 
-          <div className="flex justify-end">
+          <div className="flex justify-end gap-4">
             <Button type="submit" className="px-3 py-2">
-              افزودن مسافر
+              {mode === "create" ? "افزودن مسافر" : "ویرایش مسافر"}
             </Button>
+            {mode === "edit" && onDelete && (
+              <Button
+                type="button"
+                className="px-3 py-2 bg-error-500"
+                onClick={onDelete}
+              >
+                حذف مسافر
+              </Button>
+            )}
           </div>
         </form>
       </div>

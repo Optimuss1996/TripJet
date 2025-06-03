@@ -8,7 +8,7 @@ import {
   Tours,
   Users,
 } from "@/types/types";
-import { UserSchemaType } from "@/utils/userSchema";
+import { PassengerSchemaType, UserSchemaType } from "@/utils/userSchema";
 
 // fetch all cities
 export async function fetchAllCities(): Promise<Cities[]> {
@@ -298,6 +298,25 @@ export async function fetchPassengersByUserId(id: string) {
 //
 //
 //
+//
+export async function getPassengerById(passengerId: string) {
+  if (!passengerId) {
+    throw new Error("passengerId not correct");
+  }
+  const { data, error } = await supabase
+    .from("passengers")
+    .select("*")
+    .eq("id", passengerId)
+    .single();
+
+  if (error) throw error;
+  return data as PassengerSchemaType;
+}
+//
+//
+//
+//
+//
 // 🚨insert queries🚨 //
 
 // insert reserve tour to booking table
@@ -405,4 +424,40 @@ export async function updateUserProfile(
   if (error) {
     throw new Error("خطا در بروزرسانی اطلاعات کاربر");
   }
+}
+// update passengers by passenger id
+export async function updatePassengers(
+  passengerId: string,
+  updatedFields: Partial<PassengerSchemaType>
+) {
+  const { data, error } = await supabase
+    .from("passengers")
+    .update(updatedFields)
+    .eq("id", passengerId);
+
+  if (error) {
+    throw new Error("خطا در بروزرسانی اطلاعات مسافر");
+  }
+  return data;
+}
+// 🚨 delete 🚨
+//
+//
+//
+//
+//
+// delete passengers by passenger id
+export async function deletePassengers(passengerId: string) {
+  if (!passengerId) {
+    throw new Error("passengerId not correct");
+  }
+  const { data, error } = await supabase
+    .from("passengers")
+    .delete()
+    .eq("id", passengerId);
+
+  if (error) {
+    throw new Error("خطا در حذف مسافر");
+  }
+  return data;
 }

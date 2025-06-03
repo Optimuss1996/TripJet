@@ -1,4 +1,3 @@
-// hooks/ReactQuery/useUpdateUserProfile.ts
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { UserSchemaType } from "@/utils/userSchema";

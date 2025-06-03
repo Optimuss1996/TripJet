@@ -1,7 +1,6 @@
 import { useAuth } from "@/providers/AuthProvider";
 import { Navigate, useLocation } from "react-router";
 import useAuthModal from "@/store/useAuthModal";
-import { useEffect } from "react";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -10,19 +9,21 @@ interface ProtectedRouteProps {
 export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   const { session, loading } = useAuth();
   const location = useLocation();
-  const authModal = useAuthModal();
-
-  useEffect(() => {
-    if (!loading && !session) {
-      authModal.onOpen();
-    }
-  }, [session, loading, authModal]);
+  const { onOpen } = useAuthModal();
 
   if (loading) {
-    return null; // یا یک کامپوننت Loading نمایش داده شود
+    return null;
   }
 
   if (!session) {
+    // if the user is not logged in, and the user is not on the home page, open the modal
+    const isRedirectingToHome =
+      location.pathname === "/" && location.state?.redirected;
+
+    if (!isRedirectingToHome) {
+      onOpen();
+    }
+
     return <Navigate to="/" state={{ from: location }} replace />;
   }
 

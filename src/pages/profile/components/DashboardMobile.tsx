@@ -5,39 +5,29 @@ import { IoExitOutline } from "react-icons/io5";
 import ProfileModalMobile from "./ProfileModalMobile";
 import { Outlet, useLocation, useNavigate } from "react-router";
 import BackButton from "./BackButton";
-import { useAuth } from "@/providers/AuthProvider";
 import { supabase } from "@/lib/supabaseClient";
 import { toast } from "sonner";
-import useAuthModal from "@/store/useAuthModal";
 
 export default function DashboardMobile() {
   const location = useLocation();
   const isRoute = location.pathname === "/profile";
-  const { session } = useAuth();
+
   const navigate = useNavigate();
-  const { onOpen, setWasLoggedOut } = useAuthModal();
 
   async function handleLogOut() {
-    const { error } = await supabase.auth.signOut();
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) throw error;
 
-    if (error) {
+      toast.success("خارج شدید");
+
+      navigate("/", { replace: true, state: { redirected: true } });
+    } catch (error) {
       toast.error("خروج با خطا مواجه شد!");
-      setWasLoggedOut(true);
-      console.error(error.message);
-      navigate("/");
-    } else {
-      toast.success(" خارج شدید ");
-      setWasLoggedOut(true);
+      console.error(error);
     }
   }
 
-  function handleAuthAction() {
-    if (session) {
-      handleLogOut();
-    } else {
-      onOpen();
-    }
-  }
   return (
     <div className=" p-3">
       {isRoute ? (
@@ -49,7 +39,7 @@ export default function DashboardMobile() {
             <UserProfile />
             <UserMenu />
             <Button
-              onClick={handleAuthAction}
+              onClick={handleLogOut}
               className=" bg-error-100 text-error-500 px-6 py-4"
             >
               <div className=" flex justify-center items-center gap-1">

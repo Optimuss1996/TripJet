@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import {
@@ -13,15 +13,11 @@ import { supabase } from "@/lib/supabaseClient";
 export default function AuthModal() {
   const { isOpen, onClose } = useAuthModal();
 
-  const toastShown = useRef(false);
-
   useEffect(() => {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === "SIGNED_IN" && session && !toastShown.current) {
-        toastShown.current = true;
-
+      if (event === "SIGNED_IN" && session) {
         onClose();
       }
     });

@@ -3,24 +3,23 @@ import UserMenu from "./UserMenu";
 import UserProfile from "./UserProfile";
 import { IoExitOutline } from "react-icons/io5";
 import { Outlet, useNavigate } from "react-router";
-import { supabase } from "@/lib/supabaseClient";
 import { toast } from "sonner";
-// import { useAuth } from "@/providers/AuthProvider";
+import { supabase } from "@/lib/supabaseClient";
 
 export default function Dashboard() {
-  // const { session } = useAuth();
   const navigate = useNavigate();
-  console.log("Dashboard rendered");
 
   async function handleLogOut() {
-    const { error } = await supabase.auth.signOut();
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) throw error;
 
-    if (error) {
+      toast.success("خارج شدید");
+
+      navigate("/", { replace: true, state: { redirected: true } });
+    } catch (error) {
       toast.error("خروج با خطا مواجه شد!");
-      console.error(error.message);
-    } else {
-      toast.success(" خارج شدید ");
-      navigate("/");
+      console.error(error);
     }
   }
 
